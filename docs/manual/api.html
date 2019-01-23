@@ -66,31 +66,46 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><div class="github-markdown" data-ice="content"><h1 id="development">Development</h1><h2 id="major-dependencies">Major Dependencies</h2><ul>
-<li><a href="https://d3js.org/">D3.js</a> 5.0.0+<ul>
-<li>Used to build the main bulk of the visualisation</li>
-</ul>
-</li>
-<li><a href="https://github.com/d3plus/d3plus-text">D3Plus Textbox</a> 0.9.0+<ul>
-<li>Truncates text to fit to a node</li>
-<li>Vertical alignment of texts</li>
-<li>Title tooltips on hover</li>
-</ul>
-</li>
-</ul>
-<p>Note these dependencies does not need to be imported by the user in the front end. This is only needed when building the project, or when using module loaders such as <code>CommonJS</code>, <code>AMD</code>, etc.</p>
-<h2 id="technologies-used">Technologies Used</h2><p>This package was created using:</p>
+<div class="content" data-ice="content"><div class="github-markdown" data-ice="content"><h1 id="api">API</h1><p>The package can be configured using either the <code>method chaining</code> syntax, or the <code>options object</code> syntax.</p>
+<h2 id="method-chaining">Method Chaining</h2><pre><code class="lang-javascript"><code class="source-code prettyprint">var treePlugin = new MitchD3Tree.BoxedTree()
+    .setData(data)
+    .setContainerElement(document.getElementById(&quot;visualisation&quot;))
+    .setIdAccessor(function(data) {
+        return data.id;
+    })
+    .setChildrenAccessor(function(data) {
+        return data.children;
+    })
+    .setBodyDisplayTextAccessor(function(data) {
+        return data.description;
+    })
+    .setTitleDisplayTextAccessor(function(data) {
+        return data.name;
+    })
+    .initialize();</code>
+</code></pre>
+<h2 id="options-object">Options Object</h2><pre><code class="lang-javascript"><code class="source-code prettyprint">var options = {
+    data: data,
+    element: document.getElementById(&quot;visualisation&quot;),
+    getId: function (data) {
+        return data.id;
+    },
+    getChildren: function (data) {
+        return data.children;
+    },
+    getBodyDisplayText: function (data) {
+        return data.description;
+    },
+    getTitleDisplayText: function (data) {
+        return data.name;
+    }
+};
+var treePlugin = new mitchD3Tree.BoxedTree(options).initialize();</code>
+</code></pre>
+<h2 id="additional-information">Additional Information</h2><p>For more information on the available <code>options</code> and/or <code>methods</code>:</p>
 <ul>
-<li><code>webpack</code> as the bundler</li>
-<li><code>npm</code> scripts to run common tasks (e.g. build and sass compilation), instead of gulp, grunt</li>
-<li><code>babel</code> with webpack to transpile JavaScript from ES6 to ES5, so this package codebase can utilise the newest ES6 features</li>
-<li><code>esdoc</code> to build the API documentations.</li>
-</ul>
-<h2 id="available-npm-commands">Available NPM Commands</h2><ul>
-<li><code>npm run build-docs</code> - Build the HTML documentations using ESDoc.</li>
-<li><code>npm run build-dev</code> - Build code with development settings.</li>
-<li><code>npm run build-prd</code> - Build code with production settings.</li>
-<li><code>npm run watch</code> - Build code and docs with development settings anytime when a change has been detected.</li>
+<li>Clone/download the repo and run the HTML files inside the <code>examples</code> folder.</li>
+<li>Refer to the API documentations, particularly the constructors.</li>
 </ul>
 </div>
 </div>

@@ -1,7 +1,6 @@
 {
     "source": "./src/js",
     "destination": "./docs",
-    "index": "./manual/README.md",
     "plugins": [
         {
             "name": "esdoc-ecmascript-proposal-plugin",
@@ -24,7 +23,12 @@
                     "repository": "https://github.com/deltoss/mitchd3tree"
                 },
                 "manual": {
+                  "index": "./manual/index.md",
+                  "globalIndex": true,
                   "files": [
+                    "./manual/installation.md",
+                    "./manual/usage.md",
+                    "./manual/api.md",
                     "./manual/development.md"
                   ],
                   "asset": "manual/asset/"

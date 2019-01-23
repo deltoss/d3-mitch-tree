@@ -9,7 +9,7 @@
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
 <meta name="description" content="D3 plugin to create interactive navigatable hierarchical tree diagrams."><meta property="twitter:card" content="summary"><meta property="twitter:title" content="mitchd3tree"><meta property="twitter:description" content="D3 plugin to create interactive navigatable hierarchical tree diagrams."></head>
-<body class="layout-container manual-root manual-index" data-ice="rootContainer">
+<body class="layout-container manual-root" data-ice="rootContainer">
 
 <header>
   <a href="./">Home</a>
@@ -66,50 +66,12 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><div class="github-markdown">
-  <div class="manual-user-index" data-ice="manualUserIndex"><p><a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
-<a href="https://esdoc.org/"><img src="https://img.shields.io/badge/Made%20with-ESDocs-green.svg" alt="made-with-esdocs"></a></p>
-<p><img src="manual/asset/MitchD3Tree Demo.gif" alt="MitchD3Tree Demo"></p>
-<h1 id="introduction">Introduction</h1><p>A D3 plugin which lets you create a stunning interactive hierarchical tree visualisation with a flat/nested dataset. It has various features which makes it suitable for traversing large data sets.</p>
-<h1 id="features">Features</h1><ul>
-<li>Zoom and Panning</li>
-<li>Automatically pan to the clicked node</li>
-<li>Hide irrelevant nodes while traversing the tree</li>
-<li>Supports AJAX load-on-demand</li>
-<li>Supports theming (via CSS)</li>
-</ul>
-<h1 id="examples">Examples</h1><p>HTML examples are included as part of the project as within the <code>examples</code> folder. Simply clone or download the repository and open up those files with your browser to see MitchD3Tree in action.</p>
-<h1 id="license">License</h1><p>MIT &#xA9; Michael Tran</p>
-</div>
-
-  
-
-  <div class="manual-cards">
-    
-  <div class="manual-card-wrap" data-ice="cards">
-      <div class="manual-card">
-        <div data-ice="card"><h1>Installation</h1><h2>Installing with Browser</h2><ol>
-<li><p>Clone or download this git repository, and move the contents of the <code>dist</code> folder to your project. For example, you can put it in <code>/scripts/mitchd3tree</code> inside your project.</p>
-</li>
-<li><p>Import the MitchD3Tree files as below, changing the path depending on where you copied it into for your project</p>
-<pre><code class="lang-html"><code class="source-code prettyprint">&lt;script src=&quot;/scripts/mitchd3tree/js/mitchD3Tree.min.js&quot;&gt;&lt;/script&gt;
-&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;/scripts/mitchd3tree/css/mitchd3tree.min.css&quot;&gt;
-&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;/scripts/mitchd3tree/css/mitchd3tree-default.min.css&quot;&gt;</code>
-</code></pre>
-</li>
-</ol><h2>Installing with NPM</h2><p>MitchD3Tree is available on npm. Add the following to your <code>package.json</code> file and then run <code>npm install</code>:</p><pre><code><code class="source-code prettyprint">&quot;dependencies&quot;: {
-    ...
-    &quot;mitchD3Tree&quot;: &quot;~1.0.0&quot;
-}</code>
-</code></pre><p>Or, run <code>npm install mitchd3tree --save</code> from your project directory.</p></div>
-        <a data-ice="link" href="manual/installation.html"></a>
-      </div>
-    </div>
-<div class="manual-card-wrap" data-ice="cards">
-      <div class="manual-card">
-        <div data-ice="card"><h1>Usage</h1><h2>Basic Usage with Nested Data</h2><p>You&apos;ll need to create a HTML element that acts as the container for the visualisation.</p><pre><code class="lang-html"><code class="source-code prettyprint">&lt;section id=&quot;visualisation&quot;&gt;
+<div class="content" data-ice="content"><div class="github-markdown" data-ice="content"><h1 id="usage">Usage</h1><h2 id="basic-usage-with-nested-data">Basic Usage with Nested Data</h2><p>You&apos;ll need to create a HTML element that acts as the container for the visualisation.</p>
+<pre><code class="lang-html"><code class="source-code prettyprint">&lt;section id=&quot;visualisation&quot;&gt;
 &lt;/section&gt;</code>
-</code></pre><p>Construct the dataset.</p><pre><code class="lang-html"><code class="source-code prettyprint">&lt;script&gt;
+</code></pre>
+<p>Construct the dataset.</p>
+<pre><code class="lang-html"><code class="source-code prettyprint">&lt;script&gt;
     var data = {
         &quot;id&quot;: 1,
         &quot;name&quot;: &quot;Animals&quot;,
@@ -170,7 +132,9 @@
         ]
     };
 &lt;/script&gt;</code>
-</code></pre><p>Use the plugin by initialising it with options and the constructed dataset.</p><pre><code class="lang-html"><code class="source-code prettyprint">&lt;script&gt;
+</code></pre>
+<p>Use the plugin by initialising it with options and the constructed dataset.</p>
+<pre><code class="lang-html"><code class="source-code prettyprint">&lt;script&gt;
     var treePlugin = new MitchD3Tree.BoxedTree()
         .setData(data)
         .setContainerElement(document.getElementById(&quot;visualisation&quot;))
@@ -188,9 +152,13 @@
         })
         .initialize();
 &lt;/script&gt;</code>
-</code></pre><h2>Basic Usage with Flat Data</h2><p>You&apos;ll need to create a HTML element that acts as the container for the visualisation.</p><pre><code class="lang-html"><code class="source-code prettyprint">&lt;section id=&quot;visualisation&quot;&gt;
+</code></pre>
+<h2 id="basic-usage-with-flat-data">Basic Usage with Flat Data</h2><p>You&apos;ll need to create a HTML element that acts as the container for the visualisation.</p>
+<pre><code class="lang-html"><code class="source-code prettyprint">&lt;section id=&quot;visualisation&quot;&gt;
 &lt;/section&gt;</code>
-</code></pre><p>Construct the dataset.</p><pre><code class="lang-html"><code class="source-code prettyprint">&lt;script&gt;
+</code></pre>
+<p>Construct the dataset.</p>
+<pre><code class="lang-html"><code class="source-code prettyprint">&lt;script&gt;
     var data = [
         {
             &quot;id&quot;: 1,
@@ -249,7 +217,9 @@
         }
     ];
 &lt;/script&gt;</code>
-</code></pre><p>Use the plugin by initialising it with options and the constructed dataset.</p><pre><code class="lang-html"><code class="source-code prettyprint">&lt;script&gt;
+</code></pre>
+<p>Use the plugin by initialising it with options and the constructed dataset.</p>
+<pre><code class="lang-html"><code class="source-code prettyprint">&lt;script&gt;
     var treePlugin = new MitchD3Tree.BoxedTree()
         .setIsFlatData(true)
         .setData(data)
@@ -268,83 +238,12 @@
         })
         .initialize();
 &lt;/script&gt;</code>
-</code></pre><h2>Additional Information</h2><p>For more information on the usage:</p><ul>
+</code></pre>
+<h2 id="additional-information">Additional Information</h2><p>For more information on the usage:</p>
+<ul>
 <li>Clone/download the repo and run the HTML files inside the <code>examples</code> folder.</li>
 <li>Refer to the API documentations.</li>
-</ul></div>
-        <a data-ice="link" href="manual/usage.html"></a>
-      </div>
-    </div>
-<div class="manual-card-wrap" data-ice="cards">
-      <div class="manual-card">
-        <div data-ice="card"><h1>API</h1><p>The package can be configured using either the <code>method chaining</code> syntax, or the <code>options object</code> syntax.</p><h2>Method Chaining</h2><pre><code class="lang-javascript"><code class="source-code prettyprint">var treePlugin = new MitchD3Tree.BoxedTree()
-    .setData(data)
-    .setContainerElement(document.getElementById(&quot;visualisation&quot;))
-    .setIdAccessor(function(data) {
-        return data.id;
-    })
-    .setChildrenAccessor(function(data) {
-        return data.children;
-    })
-    .setBodyDisplayTextAccessor(function(data) {
-        return data.description;
-    })
-    .setTitleDisplayTextAccessor(function(data) {
-        return data.name;
-    })
-    .initialize();</code>
-</code></pre><h2>Options Object</h2><pre><code class="lang-javascript"><code class="source-code prettyprint">var options = {
-    data: data,
-    element: document.getElementById(&quot;visualisation&quot;),
-    getId: function (data) {
-        return data.id;
-    },
-    getChildren: function (data) {
-        return data.children;
-    },
-    getBodyDisplayText: function (data) {
-        return data.description;
-    },
-    getTitleDisplayText: function (data) {
-        return data.name;
-    }
-};
-var treePlugin = new mitchD3Tree.BoxedTree(options).initialize();</code>
-</code></pre><h2>Additional Information</h2><p>For more information on the available <code>options</code> and/or <code>methods</code>:</p><ul>
-<li>Clone/download the repo and run the HTML files inside the <code>examples</code> folder.</li>
-<li>Refer to the API documentations, particularly the constructors.</li>
-</ul></div>
-        <a data-ice="link" href="manual/api.html"></a>
-      </div>
-    </div>
-<div class="manual-card-wrap" data-ice="cards">
-      <div class="manual-card">
-        <div data-ice="card"><h1>Development</h1><h2>Major Dependencies</h2><ul>
-<li><a href="https://d3js.org/">D3.js</a> 5.0.0+<ul>
-<li>Used to build the main bulk of the visualisation</li>
 </ul>
-</li>
-<li><a href="https://github.com/d3plus/d3plus-text">D3Plus Textbox</a> 0.9.0+<ul>
-<li>Truncates text to fit to a node</li>
-<li>Vertical alignment of texts</li>
-<li>Title tooltips on hover</li>
-</ul>
-</li>
-</ul><p>Note these dependencies does not need to be imported by the user in the front end. This is only needed when building the project, or when using module loaders such as <code>CommonJS</code>, <code>AMD</code>, etc.</p><h2>Technologies Used</h2><p>This package was created using:</p><ul>
-<li><code>webpack</code> as the bundler</li>
-<li><code>npm</code> scripts to run common tasks (e.g. build and sass compilation), instead of gulp, grunt</li>
-<li><code>babel</code> with webpack to transpile JavaScript from ES6 to ES5, so this package codebase can utilise the newest ES6 features</li>
-<li><code>esdoc</code> to build the API documentations.</li>
-</ul><h2>Available NPM Commands</h2><ul>
-<li><code>npm run build-docs</code> - Build the HTML documentations using ESDoc.</li>
-<li><code>npm run build-dev</code> - Build code with development settings.</li>
-<li><code>npm run build-prd</code> - Build code with production settings.</li>
-<li><code>npm run watch</code> - Build code and docs with development settings anytime when a change has been detected.</li>
-</ul></div>
-        <a data-ice="link" href="manual/development.html"></a>
-      </div>
-    </div>
-</div>
 </div>
 </div>
 
