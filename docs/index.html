@@ -51,8 +51,7 @@
 <li>Supports AJAX load-on-demand</li>
 <li>Supports theming (via CSS)</li>
 </ul>
-<h1 id="installation">Installation</h1><p><strong>Installing with Browser</strong></p>
-<ol>
+<h1 id="installation">Installation</h1><h2 id="installing-with-browser">Installing with Browser</h2><ol>
 <li><p>Clone or download this git repository, and move the contents of the <code>dist</code> folder to your project. For example, you can put it in <code>/scripts/mitchd3tree</code> inside your project.</p>
 </li>
 <li><p>Import the MitchD3Tree files as below, changing the path depending on where you copied it into for your project</p>
@@ -62,15 +61,13 @@
 </code></pre>
 </li>
 </ol>
-<p><strong>Installing with NPM</strong></p>
-<p>MitchD3Tree is available on npm. Add the following to your <code>package.json</code> file and then run <code>npm install</code>:</p>
+<h2 id="installing-with-npm">Installing with NPM</h2><p>MitchD3Tree is available on npm. Add the following to your <code>package.json</code> file and then run <code>npm install</code>:</p>
 <pre><code><code class="source-code prettyprint">&quot;dependencies&quot;: {
     ...
     &quot;mitchD3Tree&quot;: &quot;~1.0.0&quot;
 }</code>
 </code></pre><p>Or, run <code>npm install mitchd3tree --save</code> from your project directory.</p>
-<p><strong>Usage</strong></p>
-<p>Now you can use MitchD3Tree. E.g:</p>
+<h2 id="usage">Usage</h2><p>Now you can use MitchD3Tree. E.g:</p>
 <pre><code class="lang-html"><code class="source-code prettyprint">&lt;section id=&quot;visualisation&quot; style=&quot;border: 1px black solid;&quot;&gt;
 &lt;/section&gt;
 &lt;script&gt;
@@ -154,8 +151,7 @@
 </code></pre>
 <h1 id="examples">Examples</h1><p>HTML examples are included as part of the project as within the <code>examples</code> folder. Simply clone or download the repository and open up those files with your browser to see MitchD3Tree in action.</p>
 <h1 id="api">API</h1><p>The package can be configured using either the <code>method chaining</code> syntax, or the <code>options object</code> syntax.</p>
-<p><strong>Method Chaining</strong></p>
-<pre><code class="lang-javascript"><code class="source-code prettyprint">var treePlugin = new MitchD3Tree.BoxedTree()
+<h2 id="method-chaining">Method Chaining</h2><pre><code class="lang-javascript"><code class="source-code prettyprint">var treePlugin = new MitchD3Tree.BoxedTree()
     .setData(data)
     .setContainerElement(document.getElementById(&quot;visualisation&quot;))
     .setIdAccessor(function(data) {
@@ -172,8 +168,7 @@
     })
     .initialize();</code>
 </code></pre>
-<p><strong>Options Object</strong></p>
-<pre><code class="lang-javascript"><code class="source-code prettyprint">var options = {
+<h2 id="options-object">Options Object</h2><pre><code class="lang-javascript"><code class="source-code prettyprint">var options = {
     data: data,
     element: document.getElementById(&quot;visualisation&quot;),
     getId: function (data) {
@@ -192,9 +187,6 @@
 var treePlugin = new mitchD3Tree.BoxedTree(options).initialize();</code>
 </code></pre>
 <p>For more information on the options object, refer to the <code>examples</code>, or the API documentations, particularly the constructors.</p>
-<p><strong>API Documentation</strong></p>
-<p>You can find the API documentation at the <a href="https://deltoss.github.io//">Github Pages</a>.</p>
-<p>Alternatively, you can clone and download the repository, open up the <code>docs/index.html</code> with your browser.</p>
 <h1 id="license">License</h1><p>MIT &#xA9; Michael Tran</p>
 </div>
 </div>
