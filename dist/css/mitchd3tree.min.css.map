@@ -1,0 +1,16 @@
+{
+	"version": 3,
+	"file": "mitchd3tree.min.css",
+	"sources": [
+		"../../src/sass/mitchd3tree.scss",
+		"../../src/sass/components/core/boxed-tree.scss",
+		"../../src/sass/components/core/circle-tree.scss"
+	],
+	"sourcesContent": [
+		"@import \"./components/core/boxed-tree.scss\";\r\n@import \"./components/core/circle-tree.scss\";",
+		".mitch-d3-tree {\r\n\t&.boxed-tree {\r\n\t\t.node {\r\n\t\t\t&.selected .body-group .body-box {\r\n\t\t\t\tcursor: inherit;\r\n\t\t\t\tpointer-events: none;\t\t\t\r\n\t\t\t}\r\n\t\r\n\t\t\t.d3plus-textBox, .body-group .body-box, .title-group .title-box {\r\n\t\t\t\tcursor: pointer;\r\n\t\t\t}\r\n\t\r\n\t\t\t/*\r\n\t\t\t\tOffset the text so its right in the middle\r\n\t\t\t\tThis code is included due to d3plus not \r\n\t\t\t\tcentering vertically correctly for the textbox\r\n\t\t\t*/\r\n\t\t\t.title-group .d3plus-textBox text {\r\n\t\t\t\ttransform: translateY(0.15em);\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}",
+		".mitch-d3-tree {\r\n\t&.circle-tree {\r\n\t\t.node {\r\n\t\t\t&.selected circle {\r\n\t\t\t\tcursor: inherit;\r\n\t\t\t\tpointer-events: none;\t\t\t\r\n\t\t\t}\r\n\t\r\n\t\t\tcircle {\r\n                cursor: pointer;\r\n                r: 10;\r\n\t\t\t}\r\n\r\n\t\t\ttext {\r\n\t\t\t\ttransition: 0.3s linear;\r\n\t\t\t}\r\n\r\n\t\t\t&.childless text {\r\n\t\t\t\ttransform: translate(13px, 0.35em);\r\n\t\t\t\ttext-anchor: start;\r\n\t\t\t}\r\n\r\n\t\t\t&.collapsed text,\r\n\t\t\t&.expanded text {\r\n\t\t\t\ttransform: translate(-13px, 0.35em);\r\n\t\t\t\ttext-anchor: end;\r\n\t\t\t}\r\n\r\n\t\t\t&.middle.collapsed text,\r\n\t\t\t&.middle.expanded text {\r\n\t\t\t\ttransform: translate(-13px, -8px)\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}"
+	],
+	"names": [],
+	"mappings": "ACAA,AAGG,cAHW,AACZ,WAAW,CACX,KAAK,AACH,SAAS,CAAC,WAAW,CAAC,SAAS,AAAC,CAChC,MAAM,CAAE,OAAO,CACf,cAAc,CAAE,IAAI,CACpB,AANJ,AAQG,cARW,AACZ,WAAW,CACX,KAAK,CAMJ,eAAe,CARlB,cAAc,AACZ,WAAW,CACX,KAAK,CAMa,WAAW,CAAC,SAAS,CARzC,cAAc,AACZ,WAAW,CACX,KAAK,CAMoC,YAAY,CAAC,UAAU,AAAC,CAC/D,MAAM,CAAE,OAAO,CACf,AAVJ,AAiBG,cAjBW,AACZ,WAAW,CACX,KAAK,CAeJ,YAAY,CAAC,eAAe,CAAC,IAAI,AAAC,CACjC,SAAS,CAAE,kBAAkB,CAC7B,ACnBJ,AAGG,cAHW,AACZ,YAAY,CACZ,KAAK,AACH,SAAS,CAAC,MAAM,AAAC,CACjB,MAAM,CAAE,OAAO,CACf,cAAc,CAAE,IAAI,CACpB,AANJ,AAQG,cARW,AACZ,YAAY,CACZ,KAAK,CAMJ,MAAM,AAAC,CACM,MAAM,CAAE,OAAO,CACf,CAAC,CAAE,EAAE,CACjB,AAXJ,AAaG,cAbW,AACZ,YAAY,CACZ,KAAK,CAWJ,IAAI,AAAC,CACJ,UAAU,CAAE,WAAW,CACvB,AAfJ,AAiBG,cAjBW,AACZ,YAAY,CACZ,KAAK,AAeH,UAAU,CAAC,IAAI,AAAC,CAChB,SAAS,CAAE,uBAAuB,CAClC,WAAW,CAAE,KAAK,CAClB,AApBJ,AAsBG,cAtBW,AACZ,YAAY,CACZ,KAAK,AAoBH,UAAU,CAAC,IAAI,CAtBnB,cAAc,AACZ,YAAY,CACZ,KAAK,AAqBH,SAAS,CAAC,IAAI,AAAC,CACf,SAAS,CAAE,wBAAwB,CACnC,WAAW,CAAE,GAAG,CAChB,AA1BJ,AA4BG,cA5BW,AACZ,YAAY,CACZ,KAAK,AA0BH,OAAO,AAAA,UAAU,CAAC,IAAI,CA5B1B,cAAc,AACZ,YAAY,CACZ,KAAK,AA2BH,OAAO,AAAA,SAAS,CAAC,IAAI,AAAC,CACtB,SAAS,CAAE,sBAAsB,CACjC"
+}

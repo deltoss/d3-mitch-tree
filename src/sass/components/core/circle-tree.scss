@@ -1,0 +1,35 @@
+.mitch-d3-tree {
+	&.circle-tree {
+		.node {
+			&.selected circle {
+				cursor: inherit;
+				pointer-events: none;			
+			}
+	
+			circle {
+                cursor: pointer;
+                r: 10;
+			}
+
+			text {
+				transition: 0.3s linear;
+			}
+
+			&.childless text {
+				transform: translate(13px, 0.35em);
+				text-anchor: start;
+			}
+
+			&.collapsed text,
+			&.expanded text {
+				transform: translate(-13px, 0.35em);
+				text-anchor: end;
+			}
+
+			&.middle.collapsed text,
+			&.middle.expanded text {
+				transform: translate(-13px, -8px)
+			}
+		}
+	}
+}

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<title></title>
+		<script src="../dist/js/mitchD3Tree.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="../dist/css/mitchd3tree.min.css">
+		<link rel="stylesheet" type="text/css" href="../dist/css/mitchd3tree-theme-default.min.css">
+	</head>
+	<body>
+		<section id="visualisation" style="border: 1px black solid; max-width: 900px;">
+		</section>
+
+		<script>
+			function getData() {
+			    var data = [
+					{
+						"id": 1,
+						"name": "Animals",
+						"type": "Root",
+						"description": "A living organism that feeds on organic matter"
+					},
+					{
+						"id": 2,
+						"parentId": 1,
+						"name": "Carnivores",
+						"type": "Type",
+						"description": "Diet consists solely of animal materials"
+					},
+					{
+						"id": 3,
+						"parentId": 2,
+						"name": "Felidae",
+						"type": "Family",
+						"description": "Also known as cats"
+					},
+					{
+						"id": 4,
+						"parentId": 3,
+						"name": "Siamese Cat",
+						"type": "Organism",
+						"description": "A breed of Asian cat. it has white fur"
+					},
+					{
+						"id": 5,
+						"parentId": 3,
+						"name": "Javanese Cat",
+						"type": "Organism",
+						"description": "Domestic breed of cats, of oriental origin"
+					},
+					{
+						"id": 6,
+						"parentId": 2,
+						"name": "Ursidae",
+						"type": "Family",
+						"description": "Also known as bears"
+					},
+					{
+						"id": 7,
+						"parentId": 6,
+						"name": "Polar Bear",
+						"type": "Organism",
+						"description": "White bear native to the Arctic Circle"
+					},
+					{
+						"id": 8,
+						"parentId": 6,
+						"name": "Panda Bear",
+						"type": "Organism",
+						"description": "Spotted bear native to South Central China"
+					},
+					{
+						"id": 9,
+						"parentId": 2,
+						"name": "Canidae",
+						"type": "Family",
+						"description": "Also known as dogs"
+					},
+					{
+						"id": 10,
+						"parentId": 9,
+						"name": "Labradore Retriever",
+						"type": "Organism",
+						"description": "One of the most popular dog breeds in Canada, UK and USA"
+					},
+					{
+						"id": 11,
+						"parentId": 9,
+						"name": "Golden Retriever",
+						"type": "Organism",
+						"description": "Generally friendly, loyal and intelligent breed of dogs"
+					},
+					{
+						"id": 12,
+						"parentId": 1,
+						"name": "Herbivores",
+						"type": "Type",
+						"description": "Diet consists solely of plant matter"
+					},
+					{
+						"id": 13,
+						"parentId": 12,
+						"name": "Bovidae",
+						"type": "Family",
+						"description": "Also known as cattle or cows",
+					},
+					{
+						"id": 14,
+						"parentId": 13,
+						"name": "Angus Cattle",
+						"type": "Organism",
+						"description": "Scottish breed of black cattle"
+					},
+					{
+						"id": 15,
+						"parentId": 13,
+						"name": "Holstein Friesian Cattle",
+						"type": "Organism",
+						"description": "Known as the highest-production dairy animals"
+					},
+					{
+						"id": 16,
+						"parentId": 12,
+						"name": "Equidae",
+						"type": "Family",
+						"description": "Also known as horses"
+					},
+					{
+						"id": 17,
+						"parentId": 16,
+						"name": "Barb Horse",
+						"type": "Organism",
+						"description": "A breed of Northern African horses with high stamina and hardiness. Their generally hot temperament makes it harder to tame."
+					},
+					{
+						"id": 18,
+						"parentId": 16,
+						"name": "Holsteiner Horse",
+						"type": "Organism",
+						"description": "One of the oldest of warmblood breeds, tracing back to the 13th century. Originates from Germany"
+					},
+					{
+						"id": 19,
+						"parentId": 12,
+						"name": "Leporidae",
+						"type": "Family",
+						"description": "Also known as rabbits"
+					},
+					{
+						"id": 20,
+						"parentId": 19,
+						"name": "Lionhead rabbit",
+						"type": "Organism",
+						"description": "Unusual rabbit with a wool mane circling it's head, similar to a lion, hence it's name."
+					},
+					{
+						"id": 21,
+						"parentId": 19,
+						"name": "Silver Fox Rabbit",
+						"type": "Organism",
+						"description": "Bred for their meat and unique fur."
+					}
+				]
+
+			    return data;
+			}
+
+			var data = getData();
+			
+			var treePlugin = new MitchD3Tree.BoxedTree()
+				.setIsFlatData(true)
+				.setData(data)
+				.setElement(document.getElementById("visualisation"))
+				.setIdAccessor(function(data) {
+					return data.id;
+				})
+				.setParentIdAccessor(function(data) {
+					return data.parentId;
+				})
+				.setBodyDisplayTextAccessor(function(data) {
+					return data.description;
+				})
+				.setTitleDisplayTextAccessor(function(data) {
+					return data.name;
+				})
+				.initialize();
+				
+			/* Alternative Options Object Syntax, opposed to the Fluent Interface Above
+				var options = {
+					isFlatData: true,
+					data: data,
+					element: document.getElementById("visualisation"),
+					getId: function (data) {
+						return data.id;
+					},
+					getParentId: function (data) {
+						return data.parentId;
+					},
+					getBodyDisplayText: function (data) {
+						return data.description;
+					},
+					getTitleDisplayText: function (data) {
+						return data.name;
+					}
+				};
+				var treePlugin = new mitchD3Tree.BoxedTree(options).initialize();
+			*/
+		</script>
+	</body>
+</html>

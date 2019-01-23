@@ -1,0 +1,51 @@
+{
+  "name": "mitchd3tree",
+  "version": "1.0.0",
+  "description": "D3 plugin to create interactive navigatable hierarchical tree diagrams.",
+  "main": "./dist/js/mitchd3tree.min.js",
+  "scripts": {
+    "build-dev": "npm-run-all \"build-sass\" \"build-webpack-dev\" \"build-docs\"",
+    "build-prd": "npm-run-all \"build-sass\" \"build-webpack-prd\" \"build-docs\"",
+    "watch": "npm-run-all --parallel \"watch-sass\" \"watch-webpack\" \"watch-docs\"",
+    "build-sass": "node ./build/build-sass.js",
+    "watch-sass": "nodemon --watch ./src/sass --ext * --exec \"npm run build-sass\"",
+    "build-webpack-dev": "webpack --config webpack.config.js --mode=development",
+    "build-webpack-prd": "webpack --config webpack.config.js --mode=production",
+    "watch-webpack": "npm run build-webpack-dev -- --watch",
+    "build-docs": "esdoc -c esdoc.json",
+    "watch-docs": "nodemon --watch ./src/js --watch ./manual --watch ./README.md --ext * --exec \"npm run build-docs\""
+  },
+  "keywords": [
+    "D3",
+    "javascript"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deltoss/mitchd3tree.git"
+  },
+  "author": "Michael Tran <MTran0011@outlook.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/deltoss/mitchd3tree/issues"
+  },
+  "homepage": "https://github.com/deltoss/mitchd3tree#readme",
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.2.3",
+    "babel-loader": "^8.0.4",
+    "esdoc": "^1.1.0",
+    "esdoc-ecmascript-proposal-plugin": "^1.0.0",
+    "esdoc-publish-markdown-plugin": "^1.1.0",
+    "esdoc-standard-plugin": "^1.0.0",
+    "mkdirp": "^0.5.1",
+    "node-sass": "^4.11.0",
+    "nodemon": "^1.18.9",
+    "npm-run-all": "^4.1.5",
+    "webpack": "^4.28.2",
+    "webpack-cli": "^3.1.2"
+  },
+  "dependencies": {
+    "d3": "^5.7.0",
+    "d3plus-text": "^0.9.33"
+  }
+}

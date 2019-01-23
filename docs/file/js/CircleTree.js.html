@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">js/CircleTree.js | mitchd3tree</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="D3 plugin to create interactive navigatable hierarchical tree diagrams."><meta property="twitter:card" content="summary"><meta property="twitter:title" content="mitchd3tree"><meta property="twitter:description" content="D3 plugin to create interactive navigatable hierarchical tree diagrams."></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  <a href="./manual/index.html" data-ice="manualHeaderLink">Manual</a>
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/deltoss/mitchd3tree"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/BaseTree.js~BaseTree.html">BaseTree</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/BoxedNodeSettings.js~BoxedNodeSettings.html">BoxedNodeSettings</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/BoxedTree.js~BoxedTree.html">BoxedTree</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/CircleNodeSettings.js~CircleNodeSettings.html">CircleNodeSettings</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/CircleTree.js~CircleTree.html">CircleTree</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/LoadOnDemandSettings.js~LoadOnDemandSettings.html">LoadOnDemandSettings</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/NodeSettings.js~NodeSettings.html">NodeSettings</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">js/CircleTree.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import * as d3 from &apos;d3&apos;;
+import BaseTree from &apos;./BaseTree&apos;;
+import CircleNodeSettings from &apos;./CircleNodeSettings&apos;;
+
+class CircleTree extends BaseTree{
+    /**
+     * @param {object} [options] The options object.
+     * @param {displayTextAccessorCallBack} [options.getDisplayText] Determines how to obtain the text to display for a node corresponding to a data item.
+     */
+    constructor(options) {
+        super(options);
+        var mergedOptions = {
+            ...BaseTree.defaults,
+            ...CircleTree.defaults,
+            ...options
+        };
+
+        this._getDisplayText = mergedOptions.getDisplayText;
+        this.nodeSettings = new CircleNodeSettings(this, mergedOptions.nodeSettings);
+    }
+
+    /** @inheritdoc */
+    initialize() {
+        // Create the svg, and set its dimensions
+        super.initialize();
+        this.getSvg().classed(&apos;circle-tree&apos;, true);
+        return this;
+    }
+
+    /** @inheritdoc */
+    _nodeEnter(nodeEnter, nodes) {
+        // Add Circle for the nodes
+        nodeEnter.append(&quot;circle&quot;)
+            .attr(&quot;r&quot;, 1e-6);
+
+        // Add labels for the nodes
+        nodeEnter.append(&quot;text&quot;)
+            .text((data, index, arr) =&gt; this.getDisplayText.call(this, data));
+        return this;
+    }
+
+    /** @inheritdoc */
+    _nodeUpdate(nodeUpdate, nodeUpdateTransition, nodes) {
+        nodeUpdate.classed(&apos;middle&apos;, (data, index, arr) =&gt; {
+            var isMiddleChild = false;
+            if (data.parent &amp;&amp; data.parent.children.length % 2 !== 0) {
+                var siblings = data.parent.children;
+                var indexOfSiblings = siblings.indexOf(data);
+                if (indexOfSiblings === Math.floor(siblings.length / 2))
+                    isMiddleChild = true;
+            }
+            return isMiddleChild;
+        });
+
+        // Transition to the proper position for the node
+        nodeUpdate.transition()
+            .duration(this.getDuration())
+            // Translating while inverting X/Y to
+            // make tree direction from left to right,
+            // instead of the typical top-to-down tree
+            .attr(&quot;transform&quot;, (data, index, arr) =&gt; &quot;translate(&quot; + data.y + &quot;,&quot; + data.x + &quot;)&quot;);
+
+        nodeUpdate.select(&quot;text&quot;)
+            .style(&quot;fill-opacity&quot;, 1);
+        return this;
+    }
+
+    /** @inheritdoc */
+    _nodeExit(nodeExit, nodeExitTransition, nodes) {
+        // Remove any exiting nodes
+        nodeExitTransition.attr(&quot;transform&quot;, (data, index, arr) =&gt; {
+            var highestCollapsingParent = data.parent;
+            while (highestCollapsingParent.parent &amp;&amp; !highestCollapsingParent.parent.children) {
+                highestCollapsingParent = highestCollapsingParent.parent;
+            }
+
+            // Translating while inverting X/Y to
+            // make tree direction from left to right,
+            // instead of the typical top-to-down tree
+            return &quot;translate(&quot; + highestCollapsingParent.y + &quot;,&quot; + highestCollapsingParent.x + &quot;)&quot;;
+        })
+        .remove();
+
+        // On exit reduce the node circles size to 0
+        nodeExitTransition.select(&quot;circle&quot;)
+            .attr(&quot;r&quot;, 1e-6);
+
+        // On exit reduce the opacity of text labels
+        nodeExitTransition.select(&quot;text&quot;)
+            .style(&quot;fill-opacity&quot;, 1e-6);
+        return this;
+    }
+
+    /** @inheritdoc */
+    _getNodeSize() {
+        return [
+            this.nodeSettings.getVerticalSpacing(),
+            this.nodeSettings.getHorizontalSpacing()
+        ];
+    }
+
+    /** @inheritdoc */
+    _linkEnter(source, linkEnter, links, linkPathGenerator)	{
+        linkEnter.attr(&quot;d&quot;, (data, index, arr) =&gt; {
+            var sourceCoordinate = {
+                x: source.x0,
+                y: source.y0
+            };
+
+            var coordinatesObject = {
+                source: sourceCoordinate,
+                target: sourceCoordinate
+            };
+
+            return linkPathGenerator(coordinatesObject);
+        });
+        return this;
+    }
+
+    /** @inheritdoc */
+    _linkUpdate(source, linkUpdate, linkUpdateTransition, links, linkPathGenerator) {
+        linkUpdateTransition.attr(&quot;d&quot;, (data, index, arr) =&gt; {
+            var sourceCoordinate = data;
+            var targetCoordinate = data.parent;
+
+            var coordinatesObject = {
+                source: sourceCoordinate,
+                target: targetCoordinate
+            };
+
+            return linkPathGenerator(coordinatesObject);
+        });
+        return this;
+    }
+
+    /** @inheritdoc */
+    _linkExit(source, linkExit, linkExitTransition, links, linkPathGenerator) {
+        linkExitTransition.attr(&quot;d&quot;, (data, index, arr) =&gt; {
+            var highestCollapsingParent = data.parent;
+            while (highestCollapsingParent.parent &amp;&amp; !highestCollapsingParent.parent.children) {
+                highestCollapsingParent = highestCollapsingParent.parent;
+            }
+            var sourceCoordinate = {
+                x: highestCollapsingParent.x,
+                y: highestCollapsingParent.y
+            };
+
+            var targetCoordinate = {
+                x: highestCollapsingParent.x,
+                y: highestCollapsingParent.y
+            };
+
+            var coordinatesObject = {
+                source: sourceCoordinate,
+                target: targetCoordinate
+            };
+
+            return linkPathGenerator(coordinatesObject);
+        });
+
+        return this;
+    }
+
+    /** @inheritdoc */
+    _getLinkPathGenerator() {
+        return d3.linkHorizontal()
+            // We specify arrow functions that returns
+            // an array specifying how to get the
+            // the x/y cordinates from the object,
+            // in the format of [x, y], the default
+            // format for the link generator to
+            // generate the path
+
+            // Inverts the X/Y coordinates to draw links for a
+            // tree starting from left to right,
+            // instead of the typical top-to-down tree
+            .source((data) =&gt; [data.source.y, data.source.x])
+            .target((data) =&gt; [data.target.y, data.target.x]);
+    }
+
+    /** @inheritdoc */
+    validateSettings() {
+        super.validateSettings();
+        if (!this.getDisplayText)
+            throw &quot;Need to define the getDisplayText function as part of the options&quot;;
+        return this;
+    }
+
+    /**
+     * Sets the display text accessor,
+     * used to get the display text
+     * for the nodes.
+     * 
+     * @param {displayTextAccessorCallBack} newDisplayTextAccessor 
+     */
+    setDisplayTextAccessor(newDisplayTextAccessor) {
+        this._getDisplayText = newDisplayTextAccessor;
+        return this;
+    }
+
+    /**
+     * Gets the display text for a given data item.
+     * 
+     * @param {object} nodeDataItem The data item to get the display text from.
+     * @returns {string} The display text to render for the node.
+     */
+    getDisplayText(nodeDataItem) {
+        // Note that data in this context refers to D3 Tree data, not the original item data
+        // To Access the original item data, use the &quot;.data&quot; property
+        return this._getDisplayText(nodeDataItem.data);
+    }
+
+    /**
+     * Determines how to obtain the text
+     * to display for a node corresponding
+     * to a data item.
+     * 
+     * @callback displayTextAccessorCallBack
+     * @param {object} data The data item to get the display text from.
+     * @returns {string} The display text to render for the node.
+     */
+}
+
+CircleTree.defaults = {
+    getDisplayText: (nodeDataItem) =&gt; null
+}
+
+export default CircleTree;</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

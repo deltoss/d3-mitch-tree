@@ -1,0 +1,31 @@
+*.log
+npm-debug.log*
+
+# Coverage directory used by tools like istanbul
+coverage
+.nyc_output
+
+# Dependency directories
+node_modules
+
+# npm package lock
+package-lock.json
+yarn.lock
+
+# Generated Documentation directory
+docs
+
+# Non-NPM related project directories and files
+manual
+build
+dist
+src
+test
+examples
+CHANGELOG.md
+.travis.yml
+.editorconfig
+.eslintignore
+.eslintrc
+.babelrc
+.gitignore

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<title></title>
+		<script src="../dist/js/mitchD3Tree.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="../dist/css/mitchd3tree.min.css">
+		<link rel="stylesheet" type="text/css" href="../dist/css/mitchd3tree-theme-default.min.css">
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	</head>
+	<body>
+		<section id="visualisation" style="border: 1px black solid; max-width: 900px;">
+		</section>
+
+		<script>
+			function requestInitialRootData() {
+				var deferred = $.Deferred();
+				// Simulate AJAX operations
+				setTimeout(function () {
+					var data = {
+						"id": 1,
+						"name": "Animals",
+						"type": "Root",
+						"description": "A living organism that feeds on organic matter",
+						"hasChildren": true,
+						/* If you want initial data state, just fill up the initial children data, such as below:
+						"children": [
+							{
+								"id": 2,
+								"name": "Carnivores",
+								"type": "Type",
+								"description": "Diet consists solely of animal materials",
+								"hasChildren": true
+							},
+							{
+								"id": 6,
+								"name": "Herbivores",
+								"type": "Type",
+								"description": "Diet consists solely of plant matter",
+								"hasChildren": true
+							}
+						]
+						*/
+					};
+					deferred.resolve(data);
+				}, 2000);
+				return deferred.promise();
+			}
+
+			function requestDirectChildrenData(nodeId) {
+				var deferred = $.Deferred();
+				// Simulate AJAX operations
+				setTimeout(function () {
+					var children = null;
+					if (nodeId === 1)
+						children = [
+							{
+								"id": 2,
+								"name": "Carnivores",
+								"type": "Type",
+								"description": "Diet consists solely of animal materials",
+								"hasChildren": true
+							},
+							{
+								"id": 6,
+								"name": "Herbivores",
+								"type": "Type",
+								"description": "Diet consists solely of plant matter",
+								"hasChildren": true
+							}
+						];
+					else if (nodeId === 2)
+						children = [
+							{
+								"id": 3,
+								"name": "Siamese Cat",
+								"type": "Organism",
+								"description": "A breed of Asian cat. it has white fur",
+								"hasChildren": false
+							},
+							{
+								"id": 4,
+								"name": "Polar Bear",
+								"type": "Organism",
+								"description": "White bear native to the Arctic Circle",
+								"hasChildren": false
+							},
+							{
+								"id": 5,
+								"name": "Labradore Retriever",
+								"type": "Organism",
+								"description": "One of the most popular dog breeds in Canada, UK and USA",
+								"hasChildren": false
+							}
+						];
+					else if (nodeId === 6)
+						children = [
+							{
+								"id": 7,
+								"name": "Angus Cattle",
+								"type": "Organism",
+								"description": "Scottish breed of black cattle",
+								"hasChildren": false
+							},
+							{
+								"id": 8,
+								"name": "Barb Horse",
+								"type": "Organism",
+								"description": "A breed of Northern African horses with high stamina and hardiness. Their generally hot temperament makes it harder to tame.",
+								"hasChildren": false
+							},
+							{
+								"id": 9,
+								"name": "Silver Fox Rabbit",
+								"type": "Organism",
+								"description": "Bred for their meat and unique fur.",
+								"hasChildren": false
+							}
+						];
+
+					deferred.resolve(children);
+				}, 2000);
+				return deferred.promise();
+			}
+
+			var initialRootDataRequestPromise = requestInitialRootData();
+			initialRootDataRequestPromise.then(function(result) {
+				var treePlugin = new MitchD3Tree.BoxedTree()
+					.setData(result)
+					.setElement(document.getElementById("visualisation"))
+					.setIdAccessor(function(data) {
+						return data.id;
+					})
+					.setChildrenAccessor(function(data) {
+						return data.children;
+					})
+					.setBodyDisplayTextAccessor(function(data) {
+						return data.description;
+					})
+					.setTitleDisplayTextAccessor(function(data) {
+						return data.name;
+					})
+					.getLoadOnDemandSettings()
+						.setLoadChildrenMethod(function(data, processData) {
+							var nodeIdToLoadChildrenFor = this.getId(data);
+							requestDirectChildrenData(nodeIdToLoadChildrenFor).then(function(result) {
+								processData(result);
+							}, function() {
+								throw arguments;
+							});
+						})
+						.setHasChildrenMethod(function(data) {
+							return data.hasChildren;
+						})
+						.back()
+					.initialize();
+
+				/* Alternative Options Object Syntax, opposed to the Fluent Interface Above
+					var options = {
+						data: result,
+						element: document.getElementById("visualisation"),
+						getId: function (data) {
+							return data.id;
+						},
+						getChildren: function (data) {
+							return data.children;
+						},
+						getBodyDisplayText: function (data) {
+							return data.description;
+						},
+						getTitleDisplayText: function (data) {
+							return data.name;
+						},
+						loadOnDemand: {
+							loadChildren: function(data, processData) {
+								var nodeIdToLoadChildrenFor = this.getId(data);
+								requestDirectChildrenData(nodeIdToLoadChildrenFor).then(function(result) {
+									processData(result);
+								}, function() {
+									throw arguments;
+								});
+							},
+							hasChildren: function(data) {
+								return data.hasChildren;
+							}
+						}
+					};
+					var treePlugin = new mitchD3Tree.BoxedTree(options).initialize();
+				*/
+			});
+		</script>
+	</body>
+</html>

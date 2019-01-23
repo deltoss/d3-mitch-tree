@@ -1,0 +1,23 @@
+.mitch-d3-tree {
+	&.boxed-tree {
+		.node {
+			&.selected .body-group .body-box {
+				cursor: inherit;
+				pointer-events: none;			
+			}
+	
+			.d3plus-textBox, .body-group .body-box, .title-group .title-box {
+				cursor: pointer;
+			}
+	
+			/*
+				Offset the text so its right in the middle
+				This code is included due to d3plus not 
+				centering vertically correctly for the textbox
+			*/
+			.title-group .d3plus-textBox text {
+				transform: translateY(0.15em);
+			}
+		}
+	}
+}
