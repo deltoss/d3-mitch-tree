@@ -1,7 +1,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![made-with-esdocs](https://img.shields.io/badge/Made%20with-ESDocs-green.svg)](https://esdoc.org/)
 
-![MitchD3Tree Demo](manual/asset/MitchD3Tree&#32;Demo.gif)
+![D3 MitchTree Demo](manual/asset/D3MitchTree&#32;Demo.gif)
 
 # Introduction
 
@@ -17,7 +17,7 @@ A D3 plugin which lets you create a stunning interactive hierarchical tree visua
 
 # Documentation
 
-The project documentation can be found in the repo's [GitHub pages](https://deltoss.github.io/mitchd3tree/)
+The project documentation can be found in the repo's [GitHub pages](https://deltoss.github.io/d3-mitch-tree/)
 
 # License
 

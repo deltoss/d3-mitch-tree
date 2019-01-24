@@ -2,11 +2,11 @@
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
 	else if(typeof define === 'function' && define.amd)
-		define("mitchd3tree", [], factory);
+		define("d3-mitch-tree", [], factory);
 	else if(typeof exports === 'object')
-		exports["mitchd3tree"] = factory();
+		exports["d3-mitch-tree"] = factory();
 	else
-		root["MitchD3Tree"] = factory();
+		root["D3MitchTree"] = factory();
 })(this, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache

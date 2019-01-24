@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="../">
-  <title data-ice="title">Manual | mitchd3tree</title>
+  <title data-ice="title">Manual | d3-mitch-tree</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<meta name="description" content="D3 plugin to create interactive navigatable hierarchical tree diagrams."><meta property="twitter:card" content="summary"><meta property="twitter:title" content="mitchd3tree"><meta property="twitter:description" content="D3 plugin to create interactive navigatable hierarchical tree diagrams."></head>
+<meta name="description" content="D3 plugin to create interactive navigatable hierarchical tree diagrams."><meta property="twitter:card" content="summary"><meta property="twitter:title" content="d3-mitch-tree"><meta property="twitter:description" content="D3 plugin to create interactive navigatable hierarchical tree diagrams."></head>
 <body class="layout-container manual-root manual-index" data-ice="rootContainer">
 
 <header>
@@ -24,7 +24,7 @@
   </span>
     <ul class="search-result"></ul>
   </div>
-<a style="position:relative; top:3px;" href="https://github.com/deltoss/mitchd3tree"><img width="20px" src="./image/github.png"></a></header>
+<a style="position:relative; top:3px;" href="https://github.com/deltoss/d3-mitch-tree"><img width="20px" src="./image/github.png"></a></header>
 
 <nav class="navigation" data-ice="nav"><div class="manual-toc-root">
   
@@ -69,7 +69,7 @@
 <div class="content" data-ice="content"><div class="github-markdown">
   <div class="manual-user-index" data-ice="manualUserIndex"><p><a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
 <a href="https://esdoc.org/"><img src="https://img.shields.io/badge/Made%20with-ESDocs-green.svg" alt="made-with-esdocs"></a></p>
-<p><img src="manual/asset/MitchD3Tree Demo.gif" alt="MitchD3Tree Demo"></p>
+<p><img src="manual/asset/D3MitchTree Demo.gif" alt="D3MitchTree Demo"></p>
 <h1 id="introduction">Introduction</h1><p>A D3 plugin which lets you create a stunning interactive hierarchical tree visualisation with a flat/nested dataset. It has various features which makes it suitable for traversing large data sets.</p>
 <h1 id="features">Features</h1><ul>
 <li>Zoom and Panning</li>
@@ -78,7 +78,7 @@
 <li>Supports AJAX load-on-demand</li>
 <li>Supports theming (via CSS)</li>
 </ul>
-<h1 id="examples">Examples</h1><p>HTML examples are included as part of the project as within the <code>examples</code> folder. Simply clone or download the repository and open up those files with your browser to see MitchD3Tree in action.</p>
+<h1 id="examples">Examples</h1><p>HTML examples are included as part of the project as within the <code>examples</code> folder. Simply clone or download the repository and open up those files with your browser to see D3MitchTree in action.</p>
 <h1 id="license">License</h1><p>MIT &#xA9; Michael Tran</p>
 </div>
 
@@ -89,19 +89,19 @@
   <div class="manual-card-wrap" data-ice="cards">
       <div class="manual-card">
         <div data-ice="card"><h1>Installation</h1><h2>Installing with Browser</h2><ol>
-<li><p>Clone or download this git repository, and move the contents of the <code>dist</code> folder to your project. For example, you can put it in <code>/scripts/mitchd3tree</code> inside your project.</p>
+<li><p>Clone or download this git repository, and move the contents of the <code>dist</code> folder to your project. For example, you can put it in <code>/scripts/d3-mitch-tree</code> inside your project.</p>
 </li>
-<li><p>Import the MitchD3Tree files as below, changing the path depending on where you copied it into for your project</p>
-<pre><code class="lang-html"><code class="source-code prettyprint">&lt;script src=&quot;/scripts/mitchd3tree/js/mitchD3Tree.min.js&quot;&gt;&lt;/script&gt;
-&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;/scripts/mitchd3tree/css/mitchd3tree.min.css&quot;&gt;
-&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;/scripts/mitchd3tree/css/mitchd3tree-default.min.css&quot;&gt;</code>
+<li><p>Import the D3MitchTree files as below, changing the path depending on where you copied it into for your project</p>
+<pre><code class="lang-html"><code class="source-code prettyprint">&lt;script src=&quot;/scripts/d3-mitch-tree/js/d3-mitch-tree.min.js&quot;&gt;&lt;/script&gt;
+&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;/scripts/d3-mitch-tree/css/d3-mitch-tree.min.css&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;/scripts/d3-mitch-tree/css/d3-mitch-tree-default.min.css&quot;&gt;</code>
 </code></pre>
 </li>
-</ol><h2>Installing with NPM</h2><p>MitchD3Tree is available on npm. Add the following to your <code>package.json</code> file and then run <code>npm install</code>:</p><pre><code><code class="source-code prettyprint">&quot;dependencies&quot;: {
+</ol><h2>Installing with NPM</h2><p>D3MitchTree is available on npm. Add the following to your <code>package.json</code> file and then run <code>npm install</code>:</p><pre><code><code class="source-code prettyprint">&quot;dependencies&quot;: {
     ...
-    &quot;mitchD3Tree&quot;: &quot;~1.0.0&quot;
+    &quot;d3-mitch-tree&quot;: &quot;~1.0.0&quot;
 }</code>
-</code></pre><p>Or, run <code>npm install mitchd3tree --save</code> from your project directory.</p></div>
+</code></pre><p>Or, run <code>npm install d3-mitch-tree --save</code> from your project directory.</p></div>
         <a data-ice="link" href="manual/installation.html"></a>
       </div>
     </div>
@@ -171,7 +171,7 @@
     };
 &lt;/script&gt;</code>
 </code></pre><p>Use the plugin by initialising it with options and the constructed dataset.</p><pre><code class="lang-html"><code class="source-code prettyprint">&lt;script&gt;
-    var treePlugin = new MitchD3Tree.BoxedTree()
+    var treePlugin = new D3MitchTree.BoxedTree()
         .setData(data)
         .setContainerElement(document.getElementById(&quot;visualisation&quot;))
         .setIdAccessor(function(data) {
@@ -250,7 +250,7 @@
     ];
 &lt;/script&gt;</code>
 </code></pre><p>Use the plugin by initialising it with options and the constructed dataset.</p><pre><code class="lang-html"><code class="source-code prettyprint">&lt;script&gt;
-    var treePlugin = new MitchD3Tree.BoxedTree()
+    var treePlugin = new D3MitchTree.BoxedTree()
         .setIsFlatData(true)
         .setData(data)
         .setElement(document.getElementById(&quot;visualisation&quot;))
@@ -277,7 +277,7 @@
     </div>
 <div class="manual-card-wrap" data-ice="cards">
       <div class="manual-card">
-        <div data-ice="card"><h1>API</h1><p>The package can be configured using either the <code>method chaining</code> syntax, or the <code>options object</code> syntax.</p><h2>Method Chaining</h2><pre><code class="lang-javascript"><code class="source-code prettyprint">var treePlugin = new MitchD3Tree.BoxedTree()
+        <div data-ice="card"><h1>API</h1><p>The package can be configured using either the <code>method chaining</code> syntax, or the <code>options object</code> syntax.</p><h2>Method Chaining</h2><pre><code class="lang-javascript"><code class="source-code prettyprint">var treePlugin = new D3MitchTree.BoxedTree()
     .setData(data)
     .setContainerElement(document.getElementById(&quot;visualisation&quot;))
     .setIdAccessor(function(data) {
@@ -309,7 +309,7 @@
         return data.name;
     }
 };
-var treePlugin = new mitchD3Tree.BoxedTree(options).initialize();</code>
+var treePlugin = new D3MitchTree.BoxedTree(options).initialize();</code>
 </code></pre><h2>Additional Information</h2><p>For more information on the available <code>options</code> and/or <code>methods</code>:</p><ul>
 <li>Clone/download the repo and run the HTML files inside the <code>examples</code> folder.</li>
 <li>Refer to the API documentations, particularly the constructors.</li>

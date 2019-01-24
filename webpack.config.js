@@ -3,7 +3,7 @@ const path = require('path');
 var commonConfig = {
 	// Common Configurations for multiple outputs
 	entry: {
-		mitchd3tree: './src/index.js'
+		"d3-mitch-tree": './src/index.js'
 	},
 	module: {
 		rules: [{
@@ -25,9 +25,9 @@ var fullConfig = {
 		filename: '[name].js',
 		path: path.resolve(__dirname, 'dist/js'),
 		library: {
-			root: 'MitchD3Tree',
-			amd: 'mitchd3tree',
-			commonjs: 'mitchd3tree'
+			root: 'D3MitchTree',
+			amd: 'd3-mitch-tree',
+			commonjs: 'd3-mitch-tree'
 		},
 		libraryTarget: 'umd',
 		publicPath: './dist',
@@ -49,9 +49,9 @@ var minifiedConfig = {
 		filename: '[name].min.js',
 		path: path.resolve(__dirname, 'dist/js'),
 		library: {
-			root: 'MitchD3Tree',
-			amd: 'mitchd3tree',
-			commonjs: 'mitchd3tree'
+			root: 'D3MitchTree',
+			amd: 'd3-mitch-tree',
+			commonjs: 'd3-mitch-tree'
 		},
 		libraryTarget: 'umd',
 		publicPath: './dist',
@@ -70,9 +70,9 @@ var entryPointConfig = {
 		filename: '[name].js',
 		path: path.resolve(__dirname, 'lib'),
 		library: {
-			root: 'MitchD3Tree',
-			amd: 'mitchd3tree',
-			commonjs: 'mitchd3tree'
+			root: 'D3-Mitch-Tree',
+			amd: 'd3-mitch-tree',
+			commonjs: 'd3-mitch-tree'
 		},
 		libraryTarget: 'umd',
 		umdNamedDefine: true

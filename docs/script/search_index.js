@@ -1,44 +1,44 @@
 window.esdocSearchIndex = [
   [
-    "mitchd3tree/js/basetree.js~basetree",
+    "d3-mitch-tree/js/basetree.js~basetree",
     "class/js/BaseTree.js~BaseTree.html",
-    "<span>BaseTree</span> <span class=\"search-result-import-path\">mitchd3tree/js/BaseTree.js</span>",
+    "<span>BaseTree</span> <span class=\"search-result-import-path\">d3-mitch-tree/js/BaseTree.js</span>",
     "class"
   ],
   [
-    "mitchd3tree/js/boxednodesettings.js~boxednodesettings",
+    "d3-mitch-tree/js/boxednodesettings.js~boxednodesettings",
     "class/js/BoxedNodeSettings.js~BoxedNodeSettings.html",
-    "<span>BoxedNodeSettings</span> <span class=\"search-result-import-path\">mitchd3tree/js/BoxedNodeSettings.js</span>",
+    "<span>BoxedNodeSettings</span> <span class=\"search-result-import-path\">d3-mitch-tree/js/BoxedNodeSettings.js</span>",
     "class"
   ],
   [
-    "mitchd3tree/js/boxedtree.js~boxedtree",
+    "d3-mitch-tree/js/boxedtree.js~boxedtree",
     "class/js/BoxedTree.js~BoxedTree.html",
-    "<span>BoxedTree</span> <span class=\"search-result-import-path\">mitchd3tree/js/BoxedTree.js</span>",
+    "<span>BoxedTree</span> <span class=\"search-result-import-path\">d3-mitch-tree/js/BoxedTree.js</span>",
     "class"
   ],
   [
-    "mitchd3tree/js/circlenodesettings.js~circlenodesettings",
+    "d3-mitch-tree/js/circlenodesettings.js~circlenodesettings",
     "class/js/CircleNodeSettings.js~CircleNodeSettings.html",
-    "<span>CircleNodeSettings</span> <span class=\"search-result-import-path\">mitchd3tree/js/CircleNodeSettings.js</span>",
+    "<span>CircleNodeSettings</span> <span class=\"search-result-import-path\">d3-mitch-tree/js/CircleNodeSettings.js</span>",
     "class"
   ],
   [
-    "mitchd3tree/js/circletree.js~circletree",
+    "d3-mitch-tree/js/circletree.js~circletree",
     "class/js/CircleTree.js~CircleTree.html",
-    "<span>CircleTree</span> <span class=\"search-result-import-path\">mitchd3tree/js/CircleTree.js</span>",
+    "<span>CircleTree</span> <span class=\"search-result-import-path\">d3-mitch-tree/js/CircleTree.js</span>",
     "class"
   ],
   [
-    "mitchd3tree/js/loadondemandsettings.js~loadondemandsettings",
+    "d3-mitch-tree/js/loadondemandsettings.js~loadondemandsettings",
     "class/js/LoadOnDemandSettings.js~LoadOnDemandSettings.html",
-    "<span>LoadOnDemandSettings</span> <span class=\"search-result-import-path\">mitchd3tree/js/LoadOnDemandSettings.js</span>",
+    "<span>LoadOnDemandSettings</span> <span class=\"search-result-import-path\">d3-mitch-tree/js/LoadOnDemandSettings.js</span>",
     "class"
   ],
   [
-    "mitchd3tree/js/nodesettings.js~nodesettings",
+    "d3-mitch-tree/js/nodesettings.js~nodesettings",
     "class/js/NodeSettings.js~NodeSettings.html",
-    "<span>NodeSettings</span> <span class=\"search-result-import-path\">mitchd3tree/js/NodeSettings.js</span>",
+    "<span>NodeSettings</span> <span class=\"search-result-import-path\">d3-mitch-tree/js/NodeSettings.js</span>",
     "class"
   ],
   [

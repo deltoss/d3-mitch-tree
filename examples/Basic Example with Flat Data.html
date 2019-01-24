@@ -7,9 +7,9 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 		<title></title>
-		<script src="../dist/js/mitchD3Tree.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="../dist/css/mitchd3tree.min.css">
-		<link rel="stylesheet" type="text/css" href="../dist/css/mitchd3tree-theme-default.min.css">
+		<script src="../dist/js/d3-mitch-tree.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="../dist/css/d3-mitch-tree.min.css">
+		<link rel="stylesheet" type="text/css" href="../dist/css/d3-mitch-tree-theme-default.min.css">
 	</head>
 	<body>
 		<section id="visualisation" style="border: 1px black solid; max-width: 900px;">
@@ -171,7 +171,7 @@
 
 			var data = getData();
 			
-			var treePlugin = new MitchD3Tree.BoxedTree()
+			var treePlugin = new D3MitchTree.BoxedTree()
 				.setIsFlatData(true)
 				.setData(data)
 				.setElement(document.getElementById("visualisation"))
@@ -207,7 +207,7 @@
 						return data.name;
 					}
 				};
-				var treePlugin = new mitchD3Tree.BoxedTree(options).initialize();
+				var treePlugin = new D3MitchTree.BoxedTree(options).initialize();
 			*/
 		</script>
 	</body>

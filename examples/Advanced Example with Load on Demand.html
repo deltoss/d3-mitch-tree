@@ -7,9 +7,9 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 		<title></title>
-		<script src="../dist/js/mitchD3Tree.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="../dist/css/mitchd3tree.min.css">
-		<link rel="stylesheet" type="text/css" href="../dist/css/mitchd3tree-theme-default.min.css">
+		<script src="../dist/js/d3-mitch-tree.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="../dist/css/d3-mitch-tree.min.css">
+		<link rel="stylesheet" type="text/css" href="../dist/css/d3-mitch-tree-theme-default.min.css">
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	</head>
@@ -130,7 +130,7 @@
 
 			var initialRootDataRequestPromise = requestInitialRootData();
 			initialRootDataRequestPromise.then(function(result) {
-				var treePlugin = new MitchD3Tree.BoxedTree()
+				var treePlugin = new D3MitchTree.BoxedTree()
 					.setData(result)
 					.setElement(document.getElementById("visualisation"))
 					.setIdAccessor(function(data) {
@@ -190,7 +190,7 @@
 							}
 						}
 					};
-					var treePlugin = new mitchD3Tree.BoxedTree(options).initialize();
+					var treePlugin = new D3MitchTree.BoxedTree(options).initialize();
 				*/
 			});
 		</script>

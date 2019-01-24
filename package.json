@@ -1,8 +1,8 @@
 {
-  "name": "mitchd3tree",
+  "name": "d3-mitch-tree",
   "version": "1.0.0",
   "description": "D3 plugin to create interactive navigatable hierarchical tree diagrams.",
-  "main": "./dist/js/mitchd3tree.min.js",
+  "main": "./lib/d3-mitch-tree.js",
   "scripts": {
     "build-dev": "npm-run-all \"build-sass\" \"build-webpack-dev\" \"build-docs\"",
     "build-prd": "npm-run-all \"build-sass\" \"build-webpack-prd\" \"build-docs\"",
@@ -21,14 +21,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/deltoss/mitchd3tree.git"
+    "url": "git+https://github.com/deltoss/d3-mitch-tree.git"
   },
   "author": "Michael Tran <MTran0011@outlook.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/deltoss/mitchd3tree/issues"
+    "url": "https://github.com/deltoss/d3-mitch-tree/issues"
   },
-  "homepage": "https://github.com/deltoss/mitchd3tree#readme",
+  "homepage": "https://deltoss.github.io/d3-mitch-tree/",
   "devDependencies": {
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.2.3",

@@ -79,7 +79,7 @@ Use the plugin by initialising it with options and the constructed dataset.
 
 ```html
 <script>
-    var treePlugin = new MitchD3Tree.BoxedTree()
+    var treePlugin = new D3MitchTree.BoxedTree()
         .setData(data)
         .setContainerElement(document.getElementById("visualisation"))
         .setIdAccessor(function(data) {
@@ -175,7 +175,7 @@ Use the plugin by initialising it with options and the constructed dataset.
 
 ```html
 <script>
-    var treePlugin = new MitchD3Tree.BoxedTree()
+    var treePlugin = new D3MitchTree.BoxedTree()
         .setIsFlatData(true)
         .setData(data)
         .setElement(document.getElementById("visualisation"))
