@@ -130,7 +130,7 @@
 
 			var initialRootDataRequestPromise = requestInitialRootData();
 			initialRootDataRequestPromise.then(function(result) {
-				var treePlugin = new D3MitchTree.BoxedTree()
+				var treePlugin = new d3.mitchTree.boxedTree()
 					.setData(result)
 					.setElement(document.getElementById("visualisation"))
 					.setIdAccessor(function(data) {
@@ -190,7 +190,7 @@
 							}
 						}
 					};
-					var treePlugin = new D3MitchTree.BoxedTree(options).initialize();
+					var treePlugin = new d3.mitchTree.boxedTree(options).initialize();
 				*/
 			});
 		</script>

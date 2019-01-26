@@ -5,7 +5,7 @@ The package can be configured using either the `method chaining` syntax, or the 
 ## Method Chaining
 
 ```javascript
-var treePlugin = new D3MitchTree.BoxedTree()
+var treePlugin = new d3.mitchTree.boxedTree()
     .setData(data)
     .setContainerElement(document.getElementById("visualisation"))
     .setIdAccessor(function(data) {
@@ -42,7 +42,7 @@ var options = {
         return data.name;
     }
 };
-var treePlugin = new D3MitchTree.BoxedTree(options).initialize();
+var treePlugin = new d3.mitchTree.boxedTree(options).initialize();
 ```
 
 ## Additional Information

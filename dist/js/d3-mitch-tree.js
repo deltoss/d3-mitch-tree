@@ -2,11 +2,11 @@
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
 	else if(typeof define === 'function' && define.amd)
-		define("d3-mitch-tree", [], factory);
+		define("mitchTree", [], factory);
 	else if(typeof exports === 'object')
-		exports["d3-mitch-tree"] = factory();
+		exports["mitchTree"] = factory();
 	else
-		root["D3MitchTree"] = factory();
+		root["d3"] = root["d3"] || {}, root["d3"]["mitchTree"] = factory();
 })(this, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -13677,8 +13677,8 @@ CircleTree_CircleTree.defaults = {
 
 
 /* harmony default export */ var src = __webpack_exports__["default"] = ({
-  BoxedTree: js_BoxedTree,
-  CircleTree: js_CircleTree
+  boxedTree: js_BoxedTree,
+  circleTree: js_CircleTree
 });
 
 /***/ })

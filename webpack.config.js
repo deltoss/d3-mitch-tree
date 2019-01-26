@@ -24,11 +24,7 @@ var fullConfig = {
 	output: {
 		filename: '[name].js',
 		path: path.resolve(__dirname, 'dist/js'),
-		library: {
-			root: 'D3MitchTree',
-			amd: 'd3-mitch-tree',
-			commonjs: 'd3-mitch-tree'
-		},
+		library: ["d3", "mitchTree"],
 		libraryExport: 'default',
 		libraryTarget: 'umd',
 		publicPath: './dist',
@@ -49,11 +45,7 @@ var minifiedConfig = {
 	output: {
 		filename: '[name].min.js',
 		path: path.resolve(__dirname, 'dist/js'),
-		library: {
-			root: 'D3MitchTree',
-			amd: 'd3-mitch-tree',
-			commonjs: 'd3-mitch-tree'
-		},
+		library: ["d3", "mitchTree"],
 		libraryExport: 'default',
 		libraryTarget: 'umd',
 		publicPath: './dist',
@@ -71,11 +63,7 @@ var entryPointConfig = {
 	output: {
 		filename: '[name].js',
 		path: path.resolve(__dirname, 'lib'),
-		library: {
-			root: 'D3-Mitch-Tree',
-			amd: 'd3-mitch-tree',
-			commonjs: 'd3-mitch-tree'
-		},
+		library: ["d3", "mitchTree"],
 		libraryExport: 'default',
 		libraryTarget: 'umd',
 		umdNamedDefine: true

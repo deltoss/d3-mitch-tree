@@ -7,6 +7,7 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 		<title></title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.min.js"></script>
 		<script src="../dist/js/d3-mitch-tree.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="../dist/css/d3-mitch-tree.min.css">
 		<link rel="stylesheet" type="text/css" href="../dist/css/d3-mitch-tree-theme-default.min.css">
@@ -179,7 +180,7 @@
 
 			var data = getData();
 			
-			var treePlugin = new D3MitchTree.BoxedTree()
+			var treePlugin = new d3.mitchTree.boxedTree()
 				.setData(data)
 				.setElement(document.getElementById("visualisation"))
 				.setIdAccessor(function(data) {
