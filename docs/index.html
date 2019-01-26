@@ -171,7 +171,7 @@
     };
 &lt;/script&gt;</code>
 </code></pre><p>Use the plugin by initialising it with options and the constructed dataset.</p><pre><code class="lang-html"><code class="source-code prettyprint">&lt;script&gt;
-    var treePlugin = new D3MitchTree.BoxedTree()
+    var treePlugin = new d3.mitchTree.boxedTree()
         .setData(data)
         .setContainerElement(document.getElementById(&quot;visualisation&quot;))
         .setIdAccessor(function(data) {
@@ -250,7 +250,7 @@
     ];
 &lt;/script&gt;</code>
 </code></pre><p>Use the plugin by initialising it with options and the constructed dataset.</p><pre><code class="lang-html"><code class="source-code prettyprint">&lt;script&gt;
-    var treePlugin = new D3MitchTree.BoxedTree()
+    var treePlugin = new d3.mitchTree.boxedTree()
         .setIsFlatData(true)
         .setData(data)
         .setElement(document.getElementById(&quot;visualisation&quot;))
@@ -277,7 +277,7 @@
     </div>
 <div class="manual-card-wrap" data-ice="cards">
       <div class="manual-card">
-        <div data-ice="card"><h1>API</h1><p>The package can be configured using either the <code>method chaining</code> syntax, or the <code>options object</code> syntax.</p><h2>Method Chaining</h2><pre><code class="lang-javascript"><code class="source-code prettyprint">var treePlugin = new D3MitchTree.BoxedTree()
+        <div data-ice="card"><h1>API</h1><p>The package can be configured using either the <code>method chaining</code> syntax, or the <code>options object</code> syntax.</p><h2>Method Chaining</h2><pre><code class="lang-javascript"><code class="source-code prettyprint">var treePlugin = new d3.mitchTree.boxedTree()
     .setData(data)
     .setContainerElement(document.getElementById(&quot;visualisation&quot;))
     .setIdAccessor(function(data) {
@@ -309,7 +309,7 @@
         return data.name;
     }
 };
-var treePlugin = new D3MitchTree.BoxedTree(options).initialize();</code>
+var treePlugin = new d3.mitchTree.boxedTree(options).initialize();</code>
 </code></pre><h2>Additional Information</h2><p>For more information on the available <code>options</code> and/or <code>methods</code>:</p><ul>
 <li>Clone/download the repo and run the HTML files inside the <code>examples</code> folder.</li>
 <li>Refer to the API documentations, particularly the constructors.</li>

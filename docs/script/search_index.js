@@ -42,6 +42,12 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "d3-mitch-tree/js/customd3.js~d3",
+    "variable/index.html#static-variable-d3",
+    "<span>d3</span> <span class=\"search-result-import-path\">d3-mitch-tree/js/CustomD3.js</span>",
+    "variable"
+  ],
+  [
     "js/.external-ecmascript.js~array",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
     "js/.external-ecmascript.js~Array",
@@ -1372,6 +1378,12 @@ window.esdocSearchIndex = [
     "class/js/CircleTree.js~CircleTree.html#instance-method-validateSettings",
     "js/CircleTree.js~CircleTree#validateSettings",
     "method"
+  ],
+  [
+    "js/customd3.js",
+    "file/js/CustomD3.js.html",
+    "js/CustomD3.js",
+    "file"
   ],
   [
     "js/loadondemandsettings.js",

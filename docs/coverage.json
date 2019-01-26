@@ -1,6 +1,6 @@
 {
-  "coverage": "71.78%",
-  "expectCount": 202,
+  "coverage": "71.42%",
+  "expectCount": 203,
   "actualCount": 145,
   "files": {
     "js/BaseTree.js": {
@@ -79,6 +79,13 @@
         5,
         18,
         19
+      ]
+    },
+    "js/CustomD3.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        13
       ]
     },
     "js/LoadOnDemandSettings.js": {
