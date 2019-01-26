@@ -32,8 +32,10 @@
     <ul class="manual-toc">
       
     <li data-ice="manualNav" class="indent-h1" data-link="manual/installation.html"><a href="manual/installation.html" data-ice="link">Installation</a></li>
-<li data-ice="manualNav" class="indent-h2" data-link="manual/installation.html"><a href="manual/installation.html#installing-with-browser" data-ice="link">Installing with Browser</a></li>
-<li data-ice="manualNav" class="indent-h2" data-link="manual/installation.html"><a href="manual/installation.html#installing-with-npm" data-ice="link">Installing with NPM</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/installation.html"><a href="manual/installation.html#with-browser" data-ice="link">With Browser</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/installation.html"><a href="manual/installation.html#local-files" data-ice="link">Local Files</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/installation.html"><a href="manual/installation.html#cdn" data-ice="link">CDN</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/installation.html"><a href="manual/installation.html#with-npm" data-ice="link">With NPM</a></li>
 </ul>
   </div>
 <div data-ice="manual">
@@ -66,181 +68,387 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><div class="github-markdown" data-ice="content"><h1 id="usage">Usage</h1><h2 id="basic-usage-with-nested-data">Basic Usage with Nested Data</h2><p>You&apos;ll need to create a HTML element that acts as the container for the visualisation.</p>
-<pre><code class="lang-html"><code class="source-code prettyprint">&lt;section id=&quot;visualisation&quot;&gt;
-&lt;/section&gt;</code>
+<div class="content" data-ice="content"><div class="github-markdown" data-ice="content"><h1 id="usage">Usage</h1><p>First, you should create a basic HTML page with the D3 MitchTree plugin set up.
+You also need to create the <code>visualisation</code> element which we can use to
+initialise to be a tree. It could look something like the below:</p>
+<pre><code class="lang-html"><code class="source-code prettyprint">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;utf-8&quot;&gt;
+        &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+        &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+        &lt;title&gt;&lt;/title&gt;
+        &lt;script src=&quot;https://cdn.jsdelivr.net/gh/deltoss/d3-mitch-tree@1.0.2/dist/js/d3-mitch-tree.min.js&quot;&gt;&lt;/script&gt;
+        &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/gh/deltoss/d3-mitch-tree@1.0.2/dist/css/d3-mitch-tree.min.css&quot;&gt;
+        &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/gh/deltoss/d3-mitch-tree@1.0.2/dist/css/d3-mitch-tree-default.min.css&quot;&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;section id=&quot;visualisation&quot;&gt;
+        &lt;/section&gt;
+
+        &lt;script&gt;
+            // ToDo...
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code>
 </code></pre>
-<p>Construct the dataset.</p>
-<pre><code class="lang-html"><code class="source-code prettyprint">&lt;script&gt;
-    var data = {
-        &quot;id&quot;: 1,
-        &quot;name&quot;: &quot;Animals&quot;,
-        &quot;type&quot;: &quot;Root&quot;,
-        &quot;description&quot;: &quot;A living organism that feeds on organic matter&quot;,
-        &quot;children&quot;: [
-            {
-                &quot;id&quot;: 2,
-                &quot;name&quot;: &quot;Carnivores&quot;,
-                &quot;type&quot;: &quot;Type&quot;,
-                &quot;description&quot;: &quot;Diet consists solely of animal materials&quot;,
-                &quot;children&quot;: [
-                    {
-                        &quot;id&quot;: 3,
-                        &quot;name&quot;: &quot;Javanese Cat&quot;,
-                        &quot;type&quot;: &quot;Organism&quot;,
-                        &quot;description&quot;: &quot;Domestic breed of cats, of oriental origin&quot;,
-                        &quot;children&quot;: []
-                    },
-                    {
-                        &quot;id&quot;: 4,
-                        &quot;name&quot;: &quot;Polar Bear&quot;,
-                        &quot;type&quot;: &quot;Organism&quot;,
-                        &quot;description&quot;: &quot;White bear native to the Arctic Circle&quot;,
-                        &quot;children&quot;: []
-                    },
-                    {
-                        &quot;id&quot;: 5,
-                        &quot;name&quot;: &quot;Panda Bear&quot;,
-                        &quot;type&quot;: &quot;Organism&quot;,
-                        &quot;description&quot;: &quot;Spotted bear native to South Central China&quot;,
-                        &quot;children&quot;: []
-                    }
-                ]
-            },
-            {
-                &quot;id&quot;: 6,
-                &quot;name&quot;: &quot;Herbivores&quot;,
-                &quot;type&quot;: &quot;Type&quot;,
-                &quot;description&quot;: &quot;Diet consists solely of plant matter&quot;,
-                &quot;children&quot;: [
-                    {
-                        &quot;id&quot;: 7,
-                        &quot;name&quot;: &quot;Angus Cattle&quot;,
-                        &quot;type&quot;: &quot;Organism&quot;,
-                        &quot;description&quot;: &quot;Scottish breed of black cattle&quot;,
-                        &quot;children&quot;: []
-                    },
-                    {
-                        &quot;id&quot;: 8,
-                        &quot;name&quot;: &quot;Barb Horse&quot;,
-                        &quot;type&quot;: &quot;Organism&quot;,
-                        &quot;description&quot;: &quot;A breed of Northern African horses with high stamina and hardiness. Their generally hot temperament makes it harder to tame.&quot;,
-                        &quot;children&quot;: []
-                    }
-                ]
-            }
-        ]
-    };
-&lt;/script&gt;</code>
-</code></pre>
-<p>Use the plugin by initialising it with options and the constructed dataset.</p>
-<pre><code class="lang-html"><code class="source-code prettyprint">&lt;script&gt;
-    var treePlugin = new d3.mitchTree.boxedTree()
-        .setData(data)
-        .setContainerElement(document.getElementById(&quot;visualisation&quot;))
-        .setIdAccessor(function(data) {
-            return data.id;
-        })
-        .setChildrenAccessor(function(data) {
-            return data.children;
-        })
-        .setBodyDisplayTextAccessor(function(data) {
-            return data.description;
-        })
-        .setTitleDisplayTextAccessor(function(data) {
-            return data.name;
-        })
-        .initialize();
-&lt;/script&gt;</code>
-</code></pre>
-<h2 id="basic-usage-with-flat-data">Basic Usage with Flat Data</h2><p>You&apos;ll need to create a HTML element that acts as the container for the visualisation.</p>
-<pre><code class="lang-html"><code class="source-code prettyprint">&lt;section id=&quot;visualisation&quot;&gt;
-&lt;/section&gt;</code>
-</code></pre>
-<p>Construct the dataset.</p>
-<pre><code class="lang-html"><code class="source-code prettyprint">&lt;script&gt;
-    var data = [
-        {
-            &quot;id&quot;: 1,
-            &quot;name&quot;: &quot;Animals&quot;,
-            &quot;type&quot;: &quot;Root&quot;,
-            &quot;description&quot;: &quot;A living organism that feeds on organic matter&quot;
-        },
+<p>Now we can initialise and adjust the visualisation through different ways by adding the script in.
+Notice the <code>ToDo</code> placeholder is where we&apos;ll add our additional scripts.</p>
+<h2 id="basic-usage-with-nested-data">Basic Usage with Nested Data</h2><p>We need to add scripts to initialise the <code>visualisation</code> element to be a tree.
+Let&apos;s set up our data. For getting quickly set up, we&apos;ll just use hard-coded dummy data.</p>
+<pre><code class="lang-javascript"><code class="source-code prettyprint">var data = {
+    &quot;id&quot;: 1,
+    &quot;name&quot;: &quot;Animals&quot;,
+    &quot;type&quot;: &quot;Root&quot;,
+    &quot;description&quot;: &quot;A living organism that feeds on organic matter&quot;,
+    &quot;children&quot;: [
         {
             &quot;id&quot;: 2,
-            &quot;parentId&quot;: 1,
             &quot;name&quot;: &quot;Carnivores&quot;,
             &quot;type&quot;: &quot;Type&quot;,
-            &quot;description&quot;: &quot;Diet consists solely of animal materials&quot;
-        },
-        {
-            &quot;id&quot;: 3,
-            &quot;parentId&quot;: 2,
-            &quot;name&quot;: &quot;Javanese Cat&quot;,
-            &quot;type&quot;: &quot;Organism&quot;,
-            &quot;description&quot;: &quot;Domestic breed of cats, of oriental origin&quot;
-        },
-        {
-            &quot;id&quot;: 4,
-            &quot;parentId&quot;: 2,
-            &quot;name&quot;: &quot;Polar Bear&quot;,
-            &quot;type&quot;: &quot;Organism&quot;,
-            &quot;description&quot;: &quot;White bear native to the Arctic Circle&quot;
-        },
-        {
-            &quot;id&quot;: 5,
-            &quot;parentId&quot;: 2,
-            &quot;name&quot;: &quot;Panda Bear&quot;,
-            &quot;type&quot;: &quot;Organism&quot;,
-            &quot;description&quot;: &quot;Spotted bear native to South Central China&quot;
+            &quot;description&quot;: &quot;Diet consists solely of animal materials&quot;,
+            &quot;children&quot;: [
+                {
+                    &quot;id&quot;: 3,
+                    &quot;name&quot;: &quot;Javanese Cat&quot;,
+                    &quot;type&quot;: &quot;Organism&quot;,
+                    &quot;description&quot;: &quot;Domestic breed of cats, of oriental origin&quot;,
+                    &quot;children&quot;: []
+                },
+                {
+                    &quot;id&quot;: 4,
+                    &quot;name&quot;: &quot;Polar Bear&quot;,
+                    &quot;type&quot;: &quot;Organism&quot;,
+                    &quot;description&quot;: &quot;White bear native to the Arctic Circle&quot;,
+                    &quot;children&quot;: []
+                },
+                {
+                    &quot;id&quot;: 5,
+                    &quot;name&quot;: &quot;Panda Bear&quot;,
+                    &quot;type&quot;: &quot;Organism&quot;,
+                    &quot;description&quot;: &quot;Spotted bear native to South Central China&quot;,
+                    &quot;children&quot;: []
+                }
+            ]
         },
         {
             &quot;id&quot;: 6,
-            &quot;parentId&quot;: 1,
             &quot;name&quot;: &quot;Herbivores&quot;,
             &quot;type&quot;: &quot;Type&quot;,
-            &quot;description&quot;: &quot;Diet consists solely of plant matter&quot;
-        },
-        {
-            &quot;id&quot;: 7,
-            &quot;parentId&quot;: 6,
-            &quot;name&quot;: &quot;Angus Cattle&quot;,
-            &quot;type&quot;: &quot;Organism&quot;,
-            &quot;description&quot;: &quot;Scottish breed of black cattle&quot;
-        },
-        {
-            &quot;id&quot;: 8,
-            &quot;parentId&quot;: 6,
-            &quot;name&quot;: &quot;Barb Horse&quot;,
-            &quot;type&quot;: &quot;Organism&quot;,
-            &quot;description&quot;: &quot;A breed of Northern African horses with high stamina and hardiness. Their generally hot temperament makes it harder to tame.&quot;
+            &quot;description&quot;: &quot;Diet consists solely of plant matter&quot;,
+            &quot;children&quot;: [
+                {
+                    &quot;id&quot;: 7,
+                    &quot;name&quot;: &quot;Angus Cattle&quot;,
+                    &quot;type&quot;: &quot;Organism&quot;,
+                    &quot;description&quot;: &quot;Scottish breed of black cattle&quot;,
+                    &quot;children&quot;: []
+                },
+                {
+                    &quot;id&quot;: 8,
+                    &quot;name&quot;: &quot;Barb Horse&quot;,
+                    &quot;type&quot;: &quot;Organism&quot;,
+                    &quot;description&quot;: &quot;A breed of Northern African horses with high stamina and hardiness. Their generally hot temperament makes it harder to tame.&quot;,
+                    &quot;children&quot;: []
+                }
+            ]
         }
-    ];
-&lt;/script&gt;</code>
+    ]
+};</code>
+</code></pre>
+<p>Finally, we use the plugin by initialising it with options and the constructed dataset.</p>
+<pre><code class="lang-javascript"><code class="source-code prettyprint">var treePlugin = new d3.mitchTree.boxedTree()
+    .setData(data)
+    .setElement(document.getElementById(&quot;visualisation&quot;))
+    .setIdAccessor(function(data) {
+        return data.id;
+    })
+    .setChildrenAccessor(function(data) {
+        return data.children;
+    })
+    .setBodyDisplayTextAccessor(function(data) {
+        return data.description;
+    })
+    .setTitleDisplayTextAccessor(function(data) {
+        return data.name;
+    })
+    .initialize();</code>
+</code></pre>
+<p>The final code would look like this:</p>
+<pre><code class="lang-html"><code class="source-code prettyprint">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;utf-8&quot;&gt;
+        &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+        &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+        &lt;title&gt;&lt;/title&gt;
+        &lt;script src=&quot;https://cdn.jsdelivr.net/gh/deltoss/d3-mitch-tree@1.0.2/dist/js/d3-mitch-tree.min.js&quot;&gt;&lt;/script&gt;
+        &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/gh/deltoss/d3-mitch-tree@1.0.2/dist/css/d3-mitch-tree.min.css&quot;&gt;
+        &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/gh/deltoss/d3-mitch-tree@1.0.2/dist/css/d3-mitch-tree-theme-default.min.css&quot;&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;section id=&quot;visualisation&quot;&gt;
+        &lt;/section&gt;
+
+        &lt;script&gt;
+            var data = {
+                &quot;id&quot;: 1,
+                &quot;name&quot;: &quot;Animals&quot;,
+                &quot;type&quot;: &quot;Root&quot;,
+                &quot;description&quot;: &quot;A living organism that feeds on organic matter&quot;,
+                &quot;children&quot;: [
+                    {
+                        &quot;id&quot;: 2,
+                        &quot;name&quot;: &quot;Carnivores&quot;,
+                        &quot;type&quot;: &quot;Type&quot;,
+                        &quot;description&quot;: &quot;Diet consists solely of animal materials&quot;,
+                        &quot;children&quot;: [
+                            {
+                                &quot;id&quot;: 3,
+                                &quot;name&quot;: &quot;Javanese Cat&quot;,
+                                &quot;type&quot;: &quot;Organism&quot;,
+                                &quot;description&quot;: &quot;Domestic breed of cats, of oriental origin&quot;,
+                                &quot;children&quot;: []
+                            },
+                            {
+                                &quot;id&quot;: 4,
+                                &quot;name&quot;: &quot;Polar Bear&quot;,
+                                &quot;type&quot;: &quot;Organism&quot;,
+                                &quot;description&quot;: &quot;White bear native to the Arctic Circle&quot;,
+                                &quot;children&quot;: []
+                            },
+                            {
+                                &quot;id&quot;: 5,
+                                &quot;name&quot;: &quot;Panda Bear&quot;,
+                                &quot;type&quot;: &quot;Organism&quot;,
+                                &quot;description&quot;: &quot;Spotted bear native to South Central China&quot;,
+                                &quot;children&quot;: []
+                            }
+                        ]
+                    },
+                    {
+                        &quot;id&quot;: 6,
+                        &quot;name&quot;: &quot;Herbivores&quot;,
+                        &quot;type&quot;: &quot;Type&quot;,
+                        &quot;description&quot;: &quot;Diet consists solely of plant matter&quot;,
+                        &quot;children&quot;: [
+                            {
+                                &quot;id&quot;: 7,
+                                &quot;name&quot;: &quot;Angus Cattle&quot;,
+                                &quot;type&quot;: &quot;Organism&quot;,
+                                &quot;description&quot;: &quot;Scottish breed of black cattle&quot;,
+                                &quot;children&quot;: []
+                            },
+                            {
+                                &quot;id&quot;: 8,
+                                &quot;name&quot;: &quot;Barb Horse&quot;,
+                                &quot;type&quot;: &quot;Organism&quot;,
+                                &quot;description&quot;: &quot;A breed of Northern African horses with high stamina and hardiness. Their generally hot temperament makes it harder to tame.&quot;,
+                                &quot;children&quot;: []
+                            }
+                        ]
+                    }
+                ]
+            };
+
+            var treePlugin = new d3.mitchTree.boxedTree()
+                .setData(data)
+                .setElement(document.getElementById(&quot;visualisation&quot;))
+                .setIdAccessor(function(data) {
+                    return data.id;
+                })
+                .setChildrenAccessor(function(data) {
+                    return data.children;
+                })
+                .setBodyDisplayTextAccessor(function(data) {
+                    return data.description;
+                })
+                .setTitleDisplayTextAccessor(function(data) {
+                    return data.name;
+                })
+                .initialize();
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code>
+</code></pre>
+<h2 id="basic-usage-with-flat-data">Basic Usage with Flat Data</h2><p>We need to add scripts to initialise the <code>visualisation</code> element to be a tree.
+Let&apos;s set up our data. For getting quickly set up, we&apos;ll just use hard-coded dummy data.</p>
+<pre><code class="lang-javascript"><code class="source-code prettyprint">var data = [
+    {
+        &quot;id&quot;: 1,
+        &quot;name&quot;: &quot;Animals&quot;,
+        &quot;type&quot;: &quot;Root&quot;,
+        &quot;description&quot;: &quot;A living organism that feeds on organic matter&quot;
+    },
+    {
+        &quot;id&quot;: 2,
+        &quot;parentId&quot;: 1,
+        &quot;name&quot;: &quot;Carnivores&quot;,
+        &quot;type&quot;: &quot;Type&quot;,
+        &quot;description&quot;: &quot;Diet consists solely of animal materials&quot;
+    },
+    {
+        &quot;id&quot;: 3,
+        &quot;parentId&quot;: 2,
+        &quot;name&quot;: &quot;Javanese Cat&quot;,
+        &quot;type&quot;: &quot;Organism&quot;,
+        &quot;description&quot;: &quot;Domestic breed of cats, of oriental origin&quot;
+    },
+    {
+        &quot;id&quot;: 4,
+        &quot;parentId&quot;: 2,
+        &quot;name&quot;: &quot;Polar Bear&quot;,
+        &quot;type&quot;: &quot;Organism&quot;,
+        &quot;description&quot;: &quot;White bear native to the Arctic Circle&quot;
+    },
+    {
+        &quot;id&quot;: 5,
+        &quot;parentId&quot;: 2,
+        &quot;name&quot;: &quot;Panda Bear&quot;,
+        &quot;type&quot;: &quot;Organism&quot;,
+        &quot;description&quot;: &quot;Spotted bear native to South Central China&quot;
+    },
+    {
+        &quot;id&quot;: 6,
+        &quot;parentId&quot;: 1,
+        &quot;name&quot;: &quot;Herbivores&quot;,
+        &quot;type&quot;: &quot;Type&quot;,
+        &quot;description&quot;: &quot;Diet consists solely of plant matter&quot;
+    },
+    {
+        &quot;id&quot;: 7,
+        &quot;parentId&quot;: 6,
+        &quot;name&quot;: &quot;Angus Cattle&quot;,
+        &quot;type&quot;: &quot;Organism&quot;,
+        &quot;description&quot;: &quot;Scottish breed of black cattle&quot;
+    },
+    {
+        &quot;id&quot;: 8,
+        &quot;parentId&quot;: 6,
+        &quot;name&quot;: &quot;Barb Horse&quot;,
+        &quot;type&quot;: &quot;Organism&quot;,
+        &quot;description&quot;: &quot;A breed of Northern African horses with high stamina and hardiness. Their generally hot temperament makes it harder to tame.&quot;
+    }
+];</code>
 </code></pre>
 <p>Use the plugin by initialising it with options and the constructed dataset.</p>
-<pre><code class="lang-html"><code class="source-code prettyprint">&lt;script&gt;
-    var treePlugin = new d3.mitchTree.boxedTree()
-        .setIsFlatData(true)
-        .setData(data)
-        .setElement(document.getElementById(&quot;visualisation&quot;))
-        .setIdAccessor(function(data) {
-            return data.id;
-        })
-        .setParentIdAccessor(function(data) {
-            return data.parentId;
-        })
-        .setBodyDisplayTextAccessor(function(data) {
-            return data.description;
-        })
-        .setTitleDisplayTextAccessor(function(data) {
-            return data.name;
-        })
-        .initialize();
-&lt;/script&gt;</code>
+<pre><code class="lang-javascript"><code class="source-code prettyprint">var treePlugin = new d3.mitchTree.boxedTree()
+    .setIsFlatData(true)
+    .setData(data)
+    .setElement(document.getElementById(&quot;visualisation&quot;))
+    .setIdAccessor(function(data) {
+        return data.id;
+    })
+    .setParentIdAccessor(function(data) {
+        return data.parentId;
+    })
+    .setBodyDisplayTextAccessor(function(data) {
+        return data.description;
+    })
+    .setTitleDisplayTextAccessor(function(data) {
+        return data.name;
+    })
+    .initialize();</code>
+</code></pre>
+<p>The final code would look like this:</p>
+<pre><code class="lang-html"><code class="source-code prettyprint">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;utf-8&quot;&gt;
+        &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+        &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+        &lt;title&gt;&lt;/title&gt;
+        &lt;script src=&quot;https://cdn.jsdelivr.net/gh/deltoss/d3-mitch-tree@1.0.2/dist/js/d3-mitch-tree.min.js&quot;&gt;&lt;/script&gt;
+        &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/gh/deltoss/d3-mitch-tree@1.0.2/dist/css/d3-mitch-tree.min.css&quot;&gt;
+        &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/gh/deltoss/d3-mitch-tree@1.0.2/dist/css/d3-mitch-tree-theme-default.min.css&quot;&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;section id=&quot;visualisation&quot;&gt;
+        &lt;/section&gt;
+
+        &lt;script&gt;
+            var data = [
+                {
+                    &quot;id&quot;: 1,
+                    &quot;name&quot;: &quot;Animals&quot;,
+                    &quot;type&quot;: &quot;Root&quot;,
+                    &quot;description&quot;: &quot;A living organism that feeds on organic matter&quot;
+                },
+                {
+                    &quot;id&quot;: 2,
+                    &quot;parentId&quot;: 1,
+                    &quot;name&quot;: &quot;Carnivores&quot;,
+                    &quot;type&quot;: &quot;Type&quot;,
+                    &quot;description&quot;: &quot;Diet consists solely of animal materials&quot;
+                },
+                {
+                    &quot;id&quot;: 3,
+                    &quot;parentId&quot;: 2,
+                    &quot;name&quot;: &quot;Javanese Cat&quot;,
+                    &quot;type&quot;: &quot;Organism&quot;,
+                    &quot;description&quot;: &quot;Domestic breed of cats, of oriental origin&quot;
+                },
+                {
+                    &quot;id&quot;: 4,
+                    &quot;parentId&quot;: 2,
+                    &quot;name&quot;: &quot;Polar Bear&quot;,
+                    &quot;type&quot;: &quot;Organism&quot;,
+                    &quot;description&quot;: &quot;White bear native to the Arctic Circle&quot;
+                },
+                {
+                    &quot;id&quot;: 5,
+                    &quot;parentId&quot;: 2,
+                    &quot;name&quot;: &quot;Panda Bear&quot;,
+                    &quot;type&quot;: &quot;Organism&quot;,
+                    &quot;description&quot;: &quot;Spotted bear native to South Central China&quot;
+                },
+                {
+                    &quot;id&quot;: 6,
+                    &quot;parentId&quot;: 1,
+                    &quot;name&quot;: &quot;Herbivores&quot;,
+                    &quot;type&quot;: &quot;Type&quot;,
+                    &quot;description&quot;: &quot;Diet consists solely of plant matter&quot;
+                },
+                {
+                    &quot;id&quot;: 7,
+                    &quot;parentId&quot;: 6,
+                    &quot;name&quot;: &quot;Angus Cattle&quot;,
+                    &quot;type&quot;: &quot;Organism&quot;,
+                    &quot;description&quot;: &quot;Scottish breed of black cattle&quot;
+                },
+                {
+                    &quot;id&quot;: 8,
+                    &quot;parentId&quot;: 6,
+                    &quot;name&quot;: &quot;Barb Horse&quot;,
+                    &quot;type&quot;: &quot;Organism&quot;,
+                    &quot;description&quot;: &quot;A breed of Northern African horses with high stamina and hardiness. Their generally hot temperament makes it harder to tame.&quot;
+                }
+            ];
+
+            var treePlugin = new d3.mitchTree.boxedTree()
+                .setIsFlatData(true)
+                .setData(data)
+                .setElement(document.getElementById(&quot;visualisation&quot;))
+                .setIdAccessor(function(data) {
+                    return data.id;
+                })
+                .setParentIdAccessor(function(data) {
+                    return data.parentId;
+                })
+                .setBodyDisplayTextAccessor(function(data) {
+                    return data.description;
+                })
+                .setTitleDisplayTextAccessor(function(data) {
+                    return data.name;
+                })
+                .initialize();
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code>
 </code></pre>
 <h2 id="additional-information">Additional Information</h2><p>For more information on the usage:</p>
 <ul>
+<li>Open up and view the example HTML files inside the repo&apos;s <a href="https://github.com/deltoss/d3-mitch-tree/tree/master/examples">examples folder</a>.</li>
 <li>Clone/download the repo and run the HTML files inside the <code>examples</code> folder.</li>
 <li>Refer to the API documentations.</li>
 </ul>

@@ -32,8 +32,10 @@
     <ul class="manual-toc">
       
     <li data-ice="manualNav" class="indent-h1" data-link="manual/installation.html"><a href="manual/installation.html" data-ice="link">Installation</a></li>
-<li data-ice="manualNav" class="indent-h2" data-link="manual/installation.html"><a href="manual/installation.html#installing-with-browser" data-ice="link">Installing with Browser</a></li>
-<li data-ice="manualNav" class="indent-h2" data-link="manual/installation.html"><a href="manual/installation.html#installing-with-npm" data-ice="link">Installing with NPM</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/installation.html"><a href="manual/installation.html#with-browser" data-ice="link">With Browser</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/installation.html"><a href="manual/installation.html#local-files" data-ice="link">Local Files</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/installation.html"><a href="manual/installation.html#cdn" data-ice="link">CDN</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/installation.html"><a href="manual/installation.html#with-npm" data-ice="link">With NPM</a></li>
 </ul>
   </div>
 <div data-ice="manual">
@@ -66,7 +68,8 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><div class="github-markdown" data-ice="content"><h1 id="installation">Installation</h1><h2 id="installing-with-browser">Installing with Browser</h2><ol>
+<div class="content" data-ice="content"><div class="github-markdown" data-ice="content"><h1 id="installation">Installation</h1><h2 id="with-browser">With Browser</h2><p>Note that you don&apos;t actually need <code>D3</code> itself to start using this library. You can use this library with or without <code>D3</code>.</p>
+<h3 id="local-files">Local Files</h3><ol>
 <li><p>Clone or download this git repository, and move the contents of the <code>dist</code> folder to your project. For example, you can put it in <code>/scripts/d3-mitch-tree</code> inside your project.</p>
 </li>
 <li><p>Import the D3MitchTree files as below, changing the path depending on where you copied it into for your project</p>
@@ -74,19 +77,24 @@
 &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;/scripts/d3-mitch-tree/css/d3-mitch-tree.min.css&quot;&gt;
 &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;/scripts/d3-mitch-tree/css/d3-mitch-tree-default.min.css&quot;&gt;</code>
 </code></pre>
-<p>Alternatively, you can use the CDN, as below:</p>
+</li>
+</ol>
+<h3 id="cdn">CDN</h3><p>You can alternatively use CDN so you don&apos;t have to download and set up the files:</p>
 <pre><code class="lang-html"><code class="source-code prettyprint">&lt;script src=&quot;https://cdn.jsdelivr.net/gh/deltoss/d3-mitch-tree@1.0.2/dist/js/d3-mitch-tree.min.js&quot;&gt;&lt;/script&gt;
 &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/gh/deltoss/d3-mitch-tree@1.0.2/dist/css/d3-mitch-tree.min.css&quot;&gt;
 &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/gh/deltoss/d3-mitch-tree@1.0.2/dist/css/d3-mitch-tree-default.min.css&quot;&gt;</code>
 </code></pre>
+<h2 id="with-npm">With NPM</h2><p>D3MitchTree is available on npm. You can perform the following steps to get it set up.</p>
+<ol>
+<li><p>Open up your terminal, and run the below command from your project directory:</p>
+<pre><code class="lang-bash"><code class="source-code prettyprint">npm install d3-mitch-tree --save</code>
+</code></pre>
+</li>
+<li><p>Now you can use CommonJS, AMD, or ES6 to import the plugin. For example:</p>
+<pre><code class="lang-JavaScript"><code class="source-code prettyprint">var mitchTree = require(&apos;d3-mitch-tree&apos;);</code>
+</code></pre>
 </li>
 </ol>
-<h2 id="installing-with-npm">Installing with NPM</h2><p>D3MitchTree is available on npm. Add the following to your <code>package.json</code> file and then run <code>npm install</code>:</p>
-<pre><code><code class="source-code prettyprint">&quot;dependencies&quot;: {
-    ...
-    &quot;d3-mitch-tree&quot;: &quot;~1.0.0&quot;
-}</code>
-</code></pre><p>Or, run <code>npm install d3-mitch-tree --save</code> from your project directory.</p>
 </div>
 </div>
 

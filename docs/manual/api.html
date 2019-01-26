@@ -32,8 +32,10 @@
     <ul class="manual-toc">
       
     <li data-ice="manualNav" class="indent-h1" data-link="manual/installation.html"><a href="manual/installation.html" data-ice="link">Installation</a></li>
-<li data-ice="manualNav" class="indent-h2" data-link="manual/installation.html"><a href="manual/installation.html#installing-with-browser" data-ice="link">Installing with Browser</a></li>
-<li data-ice="manualNav" class="indent-h2" data-link="manual/installation.html"><a href="manual/installation.html#installing-with-npm" data-ice="link">Installing with NPM</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/installation.html"><a href="manual/installation.html#with-browser" data-ice="link">With Browser</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/installation.html"><a href="manual/installation.html#local-files" data-ice="link">Local Files</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/installation.html"><a href="manual/installation.html#cdn" data-ice="link">CDN</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/installation.html"><a href="manual/installation.html#with-npm" data-ice="link">With NPM</a></li>
 </ul>
   </div>
 <div data-ice="manual">
@@ -69,7 +71,7 @@
 <div class="content" data-ice="content"><div class="github-markdown" data-ice="content"><h1 id="api">API</h1><p>The package can be configured using either the <code>method chaining</code> syntax, or the <code>options object</code> syntax.</p>
 <h2 id="method-chaining">Method Chaining</h2><pre><code class="lang-javascript"><code class="source-code prettyprint">var treePlugin = new d3.mitchTree.boxedTree()
     .setData(data)
-    .setContainerElement(document.getElementById(&quot;visualisation&quot;))
+    .setElement(document.getElementById(&quot;visualisation&quot;))
     .setIdAccessor(function(data) {
         return data.id;
     })

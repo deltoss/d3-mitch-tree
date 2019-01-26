@@ -7,7 +7,7 @@ The package can be configured using either the `method chaining` syntax, or the 
 ```javascript
 var treePlugin = new d3.mitchTree.boxedTree()
     .setData(data)
-    .setContainerElement(document.getElementById("visualisation"))
+    .setElement(document.getElementById("visualisation"))
     .setIdAccessor(function(data) {
         return data.id;
     })
