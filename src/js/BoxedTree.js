@@ -1,4 +1,4 @@
-import * as d3 from 'd3';
+import d3 from './CustomD3';
 import {TextBox as d3PlusTextBox} from 'd3plus-text';
 import BaseTree from './BaseTree';
 import BoxedNodeSettings from './BoxedNodeSettings';

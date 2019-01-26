@@ -1,4 +1,4 @@
-import * as d3 from 'd3';
+import d3 from './CustomD3';
 import BaseTree from './BaseTree';
 import CircleNodeSettings from './CircleNodeSettings';
 

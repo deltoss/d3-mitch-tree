@@ -29,6 +29,7 @@ var fullConfig = {
 			amd: 'd3-mitch-tree',
 			commonjs: 'd3-mitch-tree'
 		},
+		libraryExport: 'default',
 		libraryTarget: 'umd',
 		publicPath: './dist',
 		umdNamedDefine: true,
@@ -53,6 +54,7 @@ var minifiedConfig = {
 			amd: 'd3-mitch-tree',
 			commonjs: 'd3-mitch-tree'
 		},
+		libraryExport: 'default',
 		libraryTarget: 'umd',
 		publicPath: './dist',
 		umdNamedDefine: true,
@@ -74,6 +76,7 @@ var entryPointConfig = {
 			amd: 'd3-mitch-tree',
 			commonjs: 'd3-mitch-tree'
 		},
+		libraryExport: 'default',
 		libraryTarget: 'umd',
 		umdNamedDefine: true
 	},

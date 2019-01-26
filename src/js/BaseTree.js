@@ -1,4 +1,4 @@
-import * as d3 from 'd3';
+import d3 from './CustomD3';
 import NodeSettings from './NodeSettings';
 import LoadOnDemandSettings from './LoadOnDemandSettings';
 
