@@ -10,6 +10,12 @@
    <link rel="stylesheet" type="text/css" href="/scripts/d3-mitch-tree/css/d3-mitch-tree.min.css">
    <link rel="stylesheet" type="text/css" href="/scripts/d3-mitch-tree/css/d3-mitch-tree-default.min.css">
    ```
+   Alternatively, you can use the CDN, as below:
+   ```html
+   <script src="https://cdn.jsdelivr.net/gh/deltoss/d3-mitch-tree@1.0.2/dist/js/d3-mitch-tree.min.js"></script>
+   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/deltoss/d3-mitch-tree@1.0.2/dist/css/d3-mitch-tree.min.css">
+   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/deltoss/d3-mitch-tree@1.0.2/dist/css/d3-mitch-tree-default.min.css">
+   ```
 
 ## Installing with NPM
 
