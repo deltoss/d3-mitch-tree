@@ -181,7 +181,7 @@ class BoxedTree extends BaseTree{
                 .attr("y", 0)
                 .attr("x", 0);
 
-                nodeExitTransition.select(".node .title-group")
+        nodeExitTransition.select(".node .title-group")
             .attr("transform", "translate(0, " + (-nodeBodyBoxHeight / 2) + ")");
 
         nodeExitTransition.select(".node .title-group rect")
