@@ -51,6 +51,7 @@ class BaseTree {
     /**
      * @param {object} options The options object.
      * @param {string} [options.theme=default] The theme of the tree.
+     * @param {string} [options.orientation=leftToRight] The orientation of the tree.
      * @param {boolean} [options.allowPan=true] Enables/disables the mouse drag to pan feature.
      * @param {boolean} [options.allowZoom=true] Enables/disables the mouse wheel to zoom feature.
      * @param {boolean} [options.allowFocus=true] If true, clicking on a node would focus to the node, hiding all irrelevant nodes that's not a parent, ancestor, or sibling.
@@ -62,13 +63,13 @@ class BaseTree {
      * @param {getIdCallBack} options.getId
      * @param {getParentIdCallBack} [options.getParentId]
      * @param {getChildrenCallBack} [options.getChildren]
-     * @param {number} [options.widthWithoutMargin=960] The width of the tree, not including the margins.
-     * @param {number} [options.heightWithoutMargin=800] The height of the tree, not including the margins.
-     * @param {object} [options.margin] Object specifying the margins of the tree diagram.
-     * @param {number} [options.margin.top] The top margin for the tree diagram.
-     * @param {number} [options.margin.right] The right margin for the tree diagram.
-     * @param {number} [options.margin.bottom] The bottom margin for the tree diagram.
-     * @param {number} [options.margin.left] The left margin for the tree diagram.
+     * @param {number} [options.widthWithoutMargins=960] The width of the tree, not including the margins.
+     * @param {number} [options.heightWithoutMargins=800] The height of the tree, not including the margins.
+     * @param {object} [options.margins] Object specifying the margins of the tree diagram.
+     * @param {number} [options.margins.top] The top margin for the tree diagram.
+     * @param {number} [options.margins.right] The right margin for the tree diagram.
+     * @param {number} [options.margins.bottom] The bottom margin for the tree diagram.
+     * @param {number} [options.margins.left] The left margin for the tree diagram.
      * @param {number} [options.duration] Integer in milliseconds determining the duration of the animations for the tree.
      * @param {object} [options.events] Object specifying the events for the tree.
      * @param {nodeClickCallBack} [options.events.nodeClick]
@@ -96,11 +97,12 @@ class BaseTree {
 
         // Assign/Set prototype properties, using values passed from the options object
         this.setTheme(mergedOptions.theme);
+        this.setOrientation(mergedOptions.orientation);
         this.setData(mergedOptions.data);
         this.setElement(mergedOptions.element);
-        this.setWidthWithoutMargin(mergedOptions.widthWithoutMargin);
-        this.setHeightWithoutMargin(mergedOptions.heightWithoutMargin);
-        this.setMargin(mergedOptions.margin);
+        this.setWidthWithoutMargins(mergedOptions.widthWithoutMargins);
+        this.setHeightWithoutMargins(mergedOptions.heightWithoutMargins);
+        this.setMargins(mergedOptions.margins);
         this.setDuration(mergedOptions.duration);
         this.setAllowPan(mergedOptions.allowPan);
         this.setAllowZoom(mergedOptions.allowZoom);
@@ -367,6 +369,8 @@ class BaseTree {
     }
 
     /**
+     * Gets the tree theme.
+     * 
      * @returns {string} The theme the tree is using.
      */
     getTheme() {
@@ -381,6 +385,26 @@ class BaseTree {
      */
     setTheme(theme) {
         this._theme = theme;
+        return this;
+    }
+
+    /**
+     * Gets the tree orientation.
+     * 
+     * @returns {string} The orientation the tree is using.
+     */
+    getOrientation() {
+        return this._orientation;
+    }
+
+    /**
+     * Sets the tree orientation.
+     * 
+     * @param {string} orientation The orientation to set the tree to.
+     * @returns {object} The tree object.
+     */
+    setOrientation(orientation) {
+        this._orientation = orientation;
         return this;
     }
 
@@ -818,7 +842,7 @@ class BaseTree {
      * @returns {number} The width of the SVG.
      */
     getWidth() {
-        return this.getWidthWithoutMargin() - this.getMargin().left - this.getMargin().right;
+        return this.getWidthWithoutMargins() - this.getMargins().left - this.getMargins().right;
     }
 
     /**
@@ -827,7 +851,7 @@ class BaseTree {
      * @returns {number} The height of the SVG.
      */
     getHeight() {
-        return this.getHeightWithoutMargin() - this.getMargin().top - this.getMargin().bottom;
+        return this.getHeightWithoutMargins() - this.getMargins().top - this.getMargins().bottom;
     }
 
     /**
@@ -840,8 +864,8 @@ class BaseTree {
      * @param {number} newMargins.left The margin left for the tree diagram.
      * @returns {object} The tree object.
      */
-    setMargin(newMargins) {
-        this._margin = newMargins;
+    setMargins(newMargins) {
+        this._margins = newMargins;
         return this;
     }
 
@@ -850,8 +874,8 @@ class BaseTree {
      * 
      * @returns {object} The margins object.
      */
-    getMargin() {
-        return this._margin;
+    getMargins() {
+        return this._margins;
     }
 
     /**
@@ -860,7 +884,7 @@ class BaseTree {
      * @param {*} newWidthWithoutMargin The width of SVG for the tree diagram.
      * @returns {object} The tree object.
      */
-    setWidthWithoutMargin(newWidthWithoutMargin) {
+    setWidthWithoutMargins(newWidthWithoutMargin) {
         this._widthWithoutMargin = newWidthWithoutMargin;
         return this;
     }
@@ -871,7 +895,7 @@ class BaseTree {
      * 
      * @returns {number} The width (not including the margins) of the SVG for the tree diagram.
      */
-    getWidthWithoutMargin() {
+    getWidthWithoutMargins() {
         return this._widthWithoutMargin;
     }
 
@@ -881,7 +905,7 @@ class BaseTree {
      * @param {*} newHeightWithoutMargin The height of SVG for the tree diagram.
      * @returns {object} The tree object.
      */
-    setHeightWithoutMargin(newHeightWithoutMargin) {
+    setHeightWithoutMargins(newHeightWithoutMargin) {
         this._heightWithoutMargin = newHeightWithoutMargin;
         return this;
     }
@@ -892,7 +916,7 @@ class BaseTree {
      * 
      * @returns {number} The height (not including the margins) of the SVG for the tree diagram.
      */
-    getHeightWithoutMargin() {
+    getHeightWithoutMargins() {
         return this._heightWithoutMargin;
     }
 
@@ -907,9 +931,9 @@ class BaseTree {
             // Use viewBox to set SVG width and height
             // so it is responsive, and can be resized
             // based on the parent element
-            .attr("viewBox", "0 0 " + this.getWidthWithoutMargin() + " " + this.getHeightWithoutMargin());
+            .attr("viewBox", "0 0 " + this.getWidthWithoutMargins() + " " + this.getHeightWithoutMargins());
 
-        var margin = this.getMargin();
+        var margins = this.getMargins();
 
         var needToCenterView = false;
         // update the tree generator with the new width and height
@@ -932,28 +956,50 @@ class BaseTree {
         }
 
         // If we need to center the tree by adjusting the view and the node position
-        if (needToCenterView === false) {
-            // Update the view with the new margins
-            this.getView()
-                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-            this.getRoot().x0 = this.getHeight() / 2;
+        if (this.getOrientation().toLowerCase() === 'toptobottom')
+        {
+            if (needToCenterView === false) {
+                // Update the view with the new margins
+                this.getView()
+                    .attr("transform", "translate(" + margins.left + "," + margins.top + ")");
+                this.getRoot().y0 = this.getHeight() / 2;
+            }
+            else {
+                // Move the view downwards as to center the root node
+                // This is due to when you use node-size, it sets the
+                // node origin at 0, 0 instead of automatically
+                // centering it as it does with size()
+                this.getView()
+                    .attr("transform", "translate(" + margins.left + ", " + (this.getHeight() / 2 + margins.top) + ")");
+                this.getRoot().y0 = 0;
+            }
+            this.getRoot().x0 = 0;
         }
-        else {
-            // Move the view downwards as to center the root node
-            // This is due to when you use node-size, it sets the
-            // node origin at 0, 0 instead of automatically
-            // centering it as it does with size()
-            this.getView()
-                .attr("transform", "translate(" + margin.left + ", " + (this.getHeight() / 2 + this.getMargin().top) + ")");
-                this.getRoot().x0 = 0;
+        else
+        {
+            if (needToCenterView === false) {
+                // Update the view with the new margins
+                this.getView()
+                    .attr("transform", "translate(" + margins.left + "," + margins.top + ")");
+                this.getRoot().x0 = this.getHeight() / 2;
+            }
+            else {
+                // Move the view downwards as to center the root node
+                // This is due to when you use node-size, it sets the
+                // node origin at 0, 0 instead of automatically
+                // centering it as it does with size()
+                this.getView()
+                    .attr("transform", "translate(" + margins.left + ", " + (this.getHeight() / 2 + margins.top) + ")");
+                    this.getRoot().x0 = 0;
+            }
+            this.getRoot().y0 = 0;
         }
 
         if (this.getZoomListener()) {
             this.getZoomListener()
-                .extent([[0, 0], [this.getWidthWithoutMargin(), this.getHeightWithoutMargin()]]);
+                .extent([[0, 0], [this.getWidthWithoutMargins(), this.getHeightWithoutMargins()]]);
         }
-
-        this.getRoot().y0 = 0;
+        
         return this;
     }
 
@@ -1159,10 +1205,22 @@ class BaseTree {
     centerNode(nodeDataItem) {
         var transform = d3.zoomTransform(this.getSvg().node());
         var scale = transform.k;
-        var x = -nodeDataItem.y0;
-        var y = -nodeDataItem.x0;
-        var translateX = x * scale + this.getWidth() / 4;
-        var translateY = y * scale + this.getHeight() / 2;
+
+        var x, y, translateX, translateY;
+        if (this.getOrientation().toLowerCase() === 'toptobottom')
+        {
+            x = -nodeDataItem.x0;
+            y = -nodeDataItem.y0;
+            translateX = x * scale + this.getWidth() / 2;
+            translateY = y * scale + this.getHeight() / 2;
+        }
+        else
+        {
+            x = -nodeDataItem.y0;
+            y = -nodeDataItem.x0;
+            translateX = x * scale + this.getWidth() / 4;
+            translateY = y * scale + this.getHeight() / 2;
+        }
 
         this.getSvg().transition()
             .duration(this.getDuration())
@@ -1411,10 +1469,10 @@ class BaseTree {
         var nodeEnter = nodes.enter().append("g")
             .classed("node", true)
             .attr("transform", (data, index, arr) => {
-                // Translating while inverting X/Y to
-                // make tree direction from left to right,
-                // instead of the typical top-to-down tree
-                return "translate(" + nodeDataItem.y0 + "," + nodeDataItem.x0 + ")";
+                if (this.getOrientation().toLowerCase() === 'toptobottom')
+                    return "translate(" + nodeDataItem.x0 + "," + nodeDataItem.y0 + ")";
+                else
+                    return "translate(" + nodeDataItem.y0 + "," + nodeDataItem.x0 + ")";
             })
             .on("click", (data, index, arr) => this._onNodeClick.call(this, data, index, arr));
 
@@ -1547,6 +1605,7 @@ class BaseTree {
 // Define option defaults using a class static property
 BaseTree.defaults = {
     theme: 'default',
+    orientation: 'leftToRight', // topToBottom, rightToLeft, bottomToTop
     allowPan: true,
     allowZoom: true,
     allowFocus: true,
@@ -1560,9 +1619,9 @@ BaseTree.defaults = {
     getId: null,
     getParentId: null,
     getChildren: null,
-    widthWithoutMargin: 960,
-    heightWithoutMargin: 800,
-    margin: {
+    widthWithoutMargins: 960,
+    heightWithoutMargins: 800,
+    margins: {
         top: 40,
         right: 20,
         bottom: 40,

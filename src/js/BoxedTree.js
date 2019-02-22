@@ -134,7 +134,14 @@ class BoxedTree extends BaseTree{
         // Translating while inverting X/Y to
         // make tree direction from left to right,
         // instead of the typical top-to-down tree
-        nodeUpdateTransition.attr("transform", (data, index, arr) => "translate(" + data.y + "," + data.x + ")");
+        if (this.getOrientation().toLowerCase() === 'toptobottom')
+        {
+            nodeUpdateTransition.attr("transform", (data, index, arr) => "translate(" + data.x + "," + data.y + ")");
+        }
+        else
+        {
+            nodeUpdateTransition.attr("transform", (data, index, arr) => "translate(" + data.y + "," + data.x + ")");
+        }
 
         var nodeBodyBoxWidth = this.nodeSettings.getBodyBoxWidth();
         var nodeBodyBoxHeight = this.nodeSettings.getBodyBoxHeight();
@@ -161,10 +168,17 @@ class BoxedTree extends BaseTree{
                     highestCollapsingParent = highestCollapsingParent.parent;
                 }
 
-                // Translating while inverting X/Y to
-                // make tree direction from left to right,
-                // instead of the typical top-to-down tree
-                return "translate(" + (highestCollapsingParent.y + nodeBodyBoxWidth) + "," + (highestCollapsingParent.x + nodeBodyBoxHeight / 2) + ")";
+                if (this.getOrientation().toLowerCase() === 'toptobottom')
+                {
+                    return "translate(" + (highestCollapsingParent.x + nodeBodyBoxWidth / 2) + "," + (highestCollapsingParent.y + nodeBodyBoxHeight) + ")";
+                }
+                else
+                {
+                    // Translating while inverting X/Y to
+                    // make tree direction from left to right,
+                    // instead of the typical top-to-down tree
+                    return "translate(" + (highestCollapsingParent.y + nodeBodyBoxWidth) + "," + (highestCollapsingParent.x + nodeBodyBoxHeight / 2) + ")";
+                }
             })
             .remove();
 
@@ -245,16 +259,29 @@ class BoxedTree extends BaseTree{
 
     /** @inheritdoc */
     _linkExit(source, linkExit, linkExitTransition, links, linkPathGenerator) {
-        var nodeBodyBoxWidth = this.nodeSettings.getBodyBoxWidth();
         linkExitTransition.attr("d", (data, index, arr) => {
             var highestCollapsingParent = data.parent;
             while (highestCollapsingParent.parent && !highestCollapsingParent.parent.children) {
                 highestCollapsingParent = highestCollapsingParent.parent;
             }
-            var sourceCoordinate = {
-                x: highestCollapsingParent.x,
-                y: highestCollapsingParent.y + nodeBodyBoxWidth
-            };
+            
+            var sourceCoordinate = null;
+            if (this.getOrientation().toLowerCase() === 'toptobottom')
+            {
+                var nodeBodyBoxHeight = this.nodeSettings.getBodyBoxHeight();
+                sourceCoordinate = {
+                    x: highestCollapsingParent.x,
+                    y: highestCollapsingParent.y + nodeBodyBoxHeight
+                };
+            }
+            else
+            {
+                var nodeBodyBoxWidth = this.nodeSettings.getBodyBoxWidth();
+                sourceCoordinate = {
+                    x: highestCollapsingParent.x,
+                    y: highestCollapsingParent.y + nodeBodyBoxWidth
+                };
+            }
 
             var targetCoordinate = {
                 x: highestCollapsingParent.x,
@@ -275,19 +302,29 @@ class BoxedTree extends BaseTree{
     _getLinkPathGenerator() {
         // Declare box dimensions
         var nodeBodyBoxWidth = this.nodeSettings.getBodyBoxWidth();
-        return d3.linkHorizontal()
-            // We specify arrow functions that returns
-            // an array specifying how to get the
-            // the x/y cordinates from the object,
-            // in the format of [x, y], the default
-            // format for the link generator to
-            // generate the path
+        var nodeBodyBoxHeight = this.nodeSettings.getBodyBoxHeight();
 
-            // Inverts the X/Y coordinates to draw links for a
-            // tree starting from left to right,
-            // instead of the typical top-to-down tree
-            .source((data) => [data.source.y, data.source.x])
-            .target((data) => [data.target.y + nodeBodyBoxWidth, data.target.x]);
+        // We specify arrow functions that returns
+        // an array specifying how to get the
+        // the x/y cordinates from the object,
+        // in the format of [x, y], the default
+        // format for the link generator to
+        // generate the path
+        if (this.getOrientation().toLowerCase() === 'toptobottom')
+        {
+            return d3.linkVertical()
+                .source((data) => [data.source.x + nodeBodyBoxWidth / 2, data.source.y - nodeBodyBoxHeight / 2])
+                .target((data) => [data.target.x + nodeBodyBoxWidth / 2, data.target.y + nodeBodyBoxHeight / 2]);
+        }
+        else
+        {
+            return d3.linkHorizontal()
+                // Inverts the X/Y coordinates to draw links for a
+                // tree starting from left to right,
+                // instead of the typical top-to-down tree
+                .source((data) => [data.source.y, data.source.x])
+                .target((data) => [data.target.y + nodeBodyBoxWidth, data.target.x]);
+        }
     }
 
     /** @inheritdoc */
@@ -344,6 +381,23 @@ class BoxedTree extends BaseTree{
         // Note that data in this context refers to D3 Tree data, not the original item data
         // To Access the original item data, use the ".data" property
         return this._getTitleDisplayText(nodeDataItem.data);
+    }
+
+    /** @inheritdoc */
+    centerNode(nodeDataItem) {
+        var nodeBodyBoxWidth = this.nodeSettings.getBodyBoxWidth();
+        var nodeBodyBoxHeight = this.nodeSettings.getBodyBoxHeight();
+        if (this.getOrientation().toLowerCase() === 'toptobottom')
+        {
+            nodeDataItem.x0 = nodeDataItem.x0 + nodeBodyBoxWidth / 2;
+            nodeDataItem.y0 = nodeDataItem.y0 + nodeBodyBoxHeight / 2;
+        }
+        else
+        {
+            nodeDataItem.y0 = nodeDataItem.y0 + nodeBodyBoxWidth / 2;
+            nodeDataItem.x0 = nodeDataItem.x0 + nodeBodyBoxHeight / 2;
+        }
+        return super.centerNode(nodeDataItem);
     }
 
     /**

@@ -51,7 +51,7 @@
 import { select, selectAll, event } from &apos;d3-selection&apos;
 import * as hierarchy from &apos;d3-hierarchy&apos;
 import * as zoom from &apos;d3-zoom&apos;
-import { linkHorizontal } from &apos;d3-shape&apos;
+import { linkHorizontal, linkVertical } from &apos;d3-shape&apos;
 
 // create a Object with only the subset of functions/submodules/plugins that we need
 var d3 = {
@@ -61,6 +61,7 @@ var d3 = {
   //   https://stackoverflow.com/questions/40012016/importing-d3-event-into-a-custom-build-using-rollup
   get event() { return event; },
   linkHorizontal,
+  linkVertical,
   ...hierarchy,
   ...zoom,
 };

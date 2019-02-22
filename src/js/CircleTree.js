@@ -53,12 +53,18 @@ class CircleTree extends BaseTree{
         });
 
         // Transition to the proper position for the node
-        nodeUpdate.transition()
-            .duration(this.getDuration())
-            // Translating while inverting X/Y to
-            // make tree direction from left to right,
-            // instead of the typical top-to-down tree
-            .attr("transform", (data, index, arr) => "translate(" + data.y + "," + data.x + ")");
+
+        // Translating while inverting X/Y to
+        // make tree direction from left to right,
+        // instead of the typical top-to-down tree
+        if (this.getOrientation().toLowerCase() === 'toptobottom')
+        {
+            nodeUpdateTransition.attr("transform", (data, index, arr) => "translate(" + data.x + "," + data.y + ")");
+        }
+        else
+        {
+            nodeUpdateTransition.attr("transform", (data, index, arr) => "translate(" + data.y + "," + data.x + ")");
+        }
 
         nodeUpdate.select("text")
             .style("fill-opacity", 1);
@@ -77,7 +83,14 @@ class CircleTree extends BaseTree{
             // Translating while inverting X/Y to
             // make tree direction from left to right,
             // instead of the typical top-to-down tree
-            return "translate(" + highestCollapsingParent.y + "," + highestCollapsingParent.x + ")";
+            if (this.getOrientation().toLowerCase() === 'toptobottom')
+            {
+                return "translate(" + highestCollapsingParent.x + "," + highestCollapsingParent.y + ")";
+            }
+            else
+            {
+                return "translate(" + highestCollapsingParent.y + "," + highestCollapsingParent.x + ")";
+            }
         })
         .remove();
 
@@ -163,19 +176,27 @@ class CircleTree extends BaseTree{
 
     /** @inheritdoc */
     _getLinkPathGenerator() {
-        return d3.linkHorizontal()
-            // We specify arrow functions that returns
-            // an array specifying how to get the
-            // the x/y cordinates from the object,
-            // in the format of [x, y], the default
-            // format for the link generator to
-            // generate the path
-
-            // Inverts the X/Y coordinates to draw links for a
-            // tree starting from left to right,
-            // instead of the typical top-to-down tree
-            .source((data) => [data.source.y, data.source.x])
-            .target((data) => [data.target.y, data.target.x]);
+        // We specify arrow functions that returns
+        // an array specifying how to get the
+        // the x/y cordinates from the object,
+        // in the format of [x, y], the default
+        // format for the link generator to
+        // generate the path
+        if (this.getOrientation().toLowerCase() === 'toptobottom')
+        {
+            return d3.linkVertical()
+                .source((data) => [data.source.x, data.source.y])
+                .target((data) => [data.target.x, data.target.y]);
+        }
+        else
+        {
+            return d3.linkHorizontal()
+                // Inverts the X/Y coordinates to draw links for a
+                // tree starting from left to right,
+                // instead of the typical top-to-down tree
+                .source((data) => [data.source.y, data.source.x])
+                .target((data) => [data.target.y, data.target.x]);
+        }
     }
 
     /** @inheritdoc */

@@ -468,9 +468,9 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "js/basetree.js~basetree#_margin",
-    "class/js/BaseTree.js~BaseTree.html#instance-member-_margin",
-    "js/BaseTree.js~BaseTree#_margin",
+    "js/basetree.js~basetree#_margins",
+    "class/js/BaseTree.js~BaseTree.html#instance-member-_margins",
+    "js/BaseTree.js~BaseTree#_margins",
     "member"
   ],
   [
@@ -520,6 +520,12 @@ window.esdocSearchIndex = [
     "class/js/BaseTree.js~BaseTree.html#instance-method-_onNodeClick",
     "js/BaseTree.js~BaseTree#_onNodeClick",
     "method"
+  ],
+  [
+    "js/basetree.js~basetree#_orientation",
+    "class/js/BaseTree.js~BaseTree.html#instance-member-_orientation",
+    "js/BaseTree.js~BaseTree#_orientation",
+    "member"
   ],
   [
     "js/basetree.js~basetree#_panningcontainer",
@@ -714,9 +720,9 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "js/basetree.js~basetree#getheightwithoutmargin",
-    "class/js/BaseTree.js~BaseTree.html#instance-method-getHeightWithoutMargin",
-    "js/BaseTree.js~BaseTree#getHeightWithoutMargin",
+    "js/basetree.js~basetree#getheightwithoutmargins",
+    "class/js/BaseTree.js~BaseTree.html#instance-method-getHeightWithoutMargins",
+    "js/BaseTree.js~BaseTree#getHeightWithoutMargins",
     "method"
   ],
   [
@@ -744,9 +750,9 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "js/basetree.js~basetree#getmargin",
-    "class/js/BaseTree.js~BaseTree.html#instance-method-getMargin",
-    "js/BaseTree.js~BaseTree#getMargin",
+    "js/basetree.js~basetree#getmargins",
+    "class/js/BaseTree.js~BaseTree.html#instance-method-getMargins",
+    "js/BaseTree.js~BaseTree#getMargins",
     "method"
   ],
   [
@@ -783,6 +789,12 @@ window.esdocSearchIndex = [
     "js/basetree.js~basetree#getnodes",
     "class/js/BaseTree.js~BaseTree.html#instance-method-getNodes",
     "js/BaseTree.js~BaseTree#getNodes",
+    "method"
+  ],
+  [
+    "js/basetree.js~basetree#getorientation",
+    "class/js/BaseTree.js~BaseTree.html#instance-method-getOrientation",
+    "js/BaseTree.js~BaseTree#getOrientation",
     "method"
   ],
   [
@@ -840,9 +852,9 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "js/basetree.js~basetree#getwidthwithoutmargin",
-    "class/js/BaseTree.js~BaseTree.html#instance-method-getWidthWithoutMargin",
-    "js/BaseTree.js~BaseTree#getWidthWithoutMargin",
+    "js/basetree.js~basetree#getwidthwithoutmargins",
+    "class/js/BaseTree.js~BaseTree.html#instance-method-getWidthWithoutMargins",
+    "js/BaseTree.js~BaseTree#getWidthWithoutMargins",
     "method"
   ],
   [
@@ -960,9 +972,9 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "js/basetree.js~basetree#setheightwithoutmargin",
-    "class/js/BaseTree.js~BaseTree.html#instance-method-setHeightWithoutMargin",
-    "js/BaseTree.js~BaseTree#setHeightWithoutMargin",
+    "js/basetree.js~basetree#setheightwithoutmargins",
+    "class/js/BaseTree.js~BaseTree.html#instance-method-setHeightWithoutMargins",
+    "js/BaseTree.js~BaseTree#setHeightWithoutMargins",
     "method"
   ],
   [
@@ -978,9 +990,9 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "js/basetree.js~basetree#setmargin",
-    "class/js/BaseTree.js~BaseTree.html#instance-method-setMargin",
-    "js/BaseTree.js~BaseTree#setMargin",
+    "js/basetree.js~basetree#setmargins",
+    "class/js/BaseTree.js~BaseTree.html#instance-method-setMargins",
+    "js/BaseTree.js~BaseTree#setMargins",
     "method"
   ],
   [
@@ -1002,6 +1014,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "js/basetree.js~basetree#setorientation",
+    "class/js/BaseTree.js~BaseTree.html#instance-method-setOrientation",
+    "js/BaseTree.js~BaseTree#setOrientation",
+    "method"
+  ],
+  [
     "js/basetree.js~basetree#setparentidaccessor",
     "class/js/BaseTree.js~BaseTree.html#instance-method-setParentIdAccessor",
     "js/BaseTree.js~BaseTree#setParentIdAccessor",
@@ -1014,9 +1032,9 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "js/basetree.js~basetree#setwidthwithoutmargin",
-    "class/js/BaseTree.js~BaseTree.html#instance-method-setWidthWithoutMargin",
-    "js/BaseTree.js~BaseTree#setWidthWithoutMargin",
+    "js/basetree.js~basetree#setwidthwithoutmargins",
+    "class/js/BaseTree.js~BaseTree.html#instance-method-setWidthWithoutMargins",
+    "js/BaseTree.js~BaseTree#setWidthWithoutMargins",
     "method"
   ],
   [
@@ -1227,6 +1245,12 @@ window.esdocSearchIndex = [
     "js/boxedtree.js~boxedtree#_nodeupdate",
     "class/js/BoxedTree.js~BoxedTree.html#instance-method-_nodeUpdate",
     "js/BoxedTree.js~BoxedTree#_nodeUpdate",
+    "method"
+  ],
+  [
+    "js/boxedtree.js~boxedtree#centernode",
+    "class/js/BoxedTree.js~BoxedTree.html#instance-method-centerNode",
+    "js/BoxedTree.js~BoxedTree#centerNode",
     "method"
   ],
   [

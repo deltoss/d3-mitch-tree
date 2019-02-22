@@ -97,12 +97,18 @@ class CircleTree extends BaseTree{
         });
 
         // Transition to the proper position for the node
-        nodeUpdate.transition()
-            .duration(this.getDuration())
-            // Translating while inverting X/Y to
-            // make tree direction from left to right,
-            // instead of the typical top-to-down tree
-            .attr(&quot;transform&quot;, (data, index, arr) =&gt; &quot;translate(&quot; + data.y + &quot;,&quot; + data.x + &quot;)&quot;);
+
+        // Translating while inverting X/Y to
+        // make tree direction from left to right,
+        // instead of the typical top-to-down tree
+        if (this.getOrientation().toLowerCase() === &apos;toptobottom&apos;)
+        {
+            nodeUpdateTransition.attr(&quot;transform&quot;, (data, index, arr) =&gt; &quot;translate(&quot; + data.x + &quot;,&quot; + data.y + &quot;)&quot;);
+        }
+        else
+        {
+            nodeUpdateTransition.attr(&quot;transform&quot;, (data, index, arr) =&gt; &quot;translate(&quot; + data.y + &quot;,&quot; + data.x + &quot;)&quot;);
+        }
 
         nodeUpdate.select(&quot;text&quot;)
             .style(&quot;fill-opacity&quot;, 1);
@@ -121,7 +127,14 @@ class CircleTree extends BaseTree{
             // Translating while inverting X/Y to
             // make tree direction from left to right,
             // instead of the typical top-to-down tree
-            return &quot;translate(&quot; + highestCollapsingParent.y + &quot;,&quot; + highestCollapsingParent.x + &quot;)&quot;;
+            if (this.getOrientation().toLowerCase() === &apos;toptobottom&apos;)
+            {
+                return &quot;translate(&quot; + highestCollapsingParent.x + &quot;,&quot; + highestCollapsingParent.y + &quot;)&quot;;
+            }
+            else
+            {
+                return &quot;translate(&quot; + highestCollapsingParent.y + &quot;,&quot; + highestCollapsingParent.x + &quot;)&quot;;
+            }
         })
         .remove();
 
@@ -207,19 +220,27 @@ class CircleTree extends BaseTree{
 
     /** @inheritdoc */
     _getLinkPathGenerator() {
-        return d3.linkHorizontal()
-            // We specify arrow functions that returns
-            // an array specifying how to get the
-            // the x/y cordinates from the object,
-            // in the format of [x, y], the default
-            // format for the link generator to
-            // generate the path
-
-            // Inverts the X/Y coordinates to draw links for a
-            // tree starting from left to right,
-            // instead of the typical top-to-down tree
-            .source((data) =&gt; [data.source.y, data.source.x])
-            .target((data) =&gt; [data.target.y, data.target.x]);
+        // We specify arrow functions that returns
+        // an array specifying how to get the
+        // the x/y cordinates from the object,
+        // in the format of [x, y], the default
+        // format for the link generator to
+        // generate the path
+        if (this.getOrientation().toLowerCase() === &apos;toptobottom&apos;)
+        {
+            return d3.linkVertical()
+                .source((data) =&gt; [data.source.x, data.source.y])
+                .target((data) =&gt; [data.target.x, data.target.y]);
+        }
+        else
+        {
+            return d3.linkHorizontal()
+                // Inverts the X/Y coordinates to draw links for a
+                // tree starting from left to right,
+                // instead of the typical top-to-down tree
+                .source((data) =&gt; [data.source.y, data.source.x])
+                .target((data) =&gt; [data.target.y, data.target.x]);
+        }
     }
 
     /** @inheritdoc */

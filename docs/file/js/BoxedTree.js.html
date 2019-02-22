@@ -178,7 +178,14 @@ class BoxedTree extends BaseTree{
         // Translating while inverting X/Y to
         // make tree direction from left to right,
         // instead of the typical top-to-down tree
-        nodeUpdateTransition.attr(&quot;transform&quot;, (data, index, arr) =&gt; &quot;translate(&quot; + data.y + &quot;,&quot; + data.x + &quot;)&quot;);
+        if (this.getOrientation().toLowerCase() === &apos;toptobottom&apos;)
+        {
+            nodeUpdateTransition.attr(&quot;transform&quot;, (data, index, arr) =&gt; &quot;translate(&quot; + data.x + &quot;,&quot; + data.y + &quot;)&quot;);
+        }
+        else
+        {
+            nodeUpdateTransition.attr(&quot;transform&quot;, (data, index, arr) =&gt; &quot;translate(&quot; + data.y + &quot;,&quot; + data.x + &quot;)&quot;);
+        }
 
         var nodeBodyBoxWidth = this.nodeSettings.getBodyBoxWidth();
         var nodeBodyBoxHeight = this.nodeSettings.getBodyBoxHeight();
@@ -205,10 +212,17 @@ class BoxedTree extends BaseTree{
                     highestCollapsingParent = highestCollapsingParent.parent;
                 }
 
-                // Translating while inverting X/Y to
-                // make tree direction from left to right,
-                // instead of the typical top-to-down tree
-                return &quot;translate(&quot; + (highestCollapsingParent.y + nodeBodyBoxWidth) + &quot;,&quot; + (highestCollapsingParent.x + nodeBodyBoxHeight / 2) + &quot;)&quot;;
+                if (this.getOrientation().toLowerCase() === &apos;toptobottom&apos;)
+                {
+                    return &quot;translate(&quot; + (highestCollapsingParent.x + nodeBodyBoxWidth / 2) + &quot;,&quot; + (highestCollapsingParent.y + nodeBodyBoxHeight) + &quot;)&quot;;
+                }
+                else
+                {
+                    // Translating while inverting X/Y to
+                    // make tree direction from left to right,
+                    // instead of the typical top-to-down tree
+                    return &quot;translate(&quot; + (highestCollapsingParent.y + nodeBodyBoxWidth) + &quot;,&quot; + (highestCollapsingParent.x + nodeBodyBoxHeight / 2) + &quot;)&quot;;
+                }
             })
             .remove();
 
@@ -225,7 +239,7 @@ class BoxedTree extends BaseTree{
                 .attr(&quot;y&quot;, 0)
                 .attr(&quot;x&quot;, 0);
 
-                nodeExitTransition.select(&quot;.node .title-group&quot;)
+        nodeExitTransition.select(&quot;.node .title-group&quot;)
             .attr(&quot;transform&quot;, &quot;translate(0, &quot; + (-nodeBodyBoxHeight / 2) + &quot;)&quot;);
 
         nodeExitTransition.select(&quot;.node .title-group rect&quot;)
@@ -289,16 +303,29 @@ class BoxedTree extends BaseTree{
 
     /** @inheritdoc */
     _linkExit(source, linkExit, linkExitTransition, links, linkPathGenerator) {
-        var nodeBodyBoxWidth = this.nodeSettings.getBodyBoxWidth();
         linkExitTransition.attr(&quot;d&quot;, (data, index, arr) =&gt; {
             var highestCollapsingParent = data.parent;
             while (highestCollapsingParent.parent &amp;&amp; !highestCollapsingParent.parent.children) {
                 highestCollapsingParent = highestCollapsingParent.parent;
             }
-            var sourceCoordinate = {
-                x: highestCollapsingParent.x,
-                y: highestCollapsingParent.y + nodeBodyBoxWidth
-            };
+            
+            var sourceCoordinate = null;
+            if (this.getOrientation().toLowerCase() === &apos;toptobottom&apos;)
+            {
+                var nodeBodyBoxHeight = this.nodeSettings.getBodyBoxHeight();
+                sourceCoordinate = {
+                    x: highestCollapsingParent.x,
+                    y: highestCollapsingParent.y + nodeBodyBoxHeight
+                };
+            }
+            else
+            {
+                var nodeBodyBoxWidth = this.nodeSettings.getBodyBoxWidth();
+                sourceCoordinate = {
+                    x: highestCollapsingParent.x,
+                    y: highestCollapsingParent.y + nodeBodyBoxWidth
+                };
+            }
 
             var targetCoordinate = {
                 x: highestCollapsingParent.x,
@@ -319,19 +346,29 @@ class BoxedTree extends BaseTree{
     _getLinkPathGenerator() {
         // Declare box dimensions
         var nodeBodyBoxWidth = this.nodeSettings.getBodyBoxWidth();
-        return d3.linkHorizontal()
-            // We specify arrow functions that returns
-            // an array specifying how to get the
-            // the x/y cordinates from the object,
-            // in the format of [x, y], the default
-            // format for the link generator to
-            // generate the path
+        var nodeBodyBoxHeight = this.nodeSettings.getBodyBoxHeight();
 
-            // Inverts the X/Y coordinates to draw links for a
-            // tree starting from left to right,
-            // instead of the typical top-to-down tree
-            .source((data) =&gt; [data.source.y, data.source.x])
-            .target((data) =&gt; [data.target.y + nodeBodyBoxWidth, data.target.x]);
+        // We specify arrow functions that returns
+        // an array specifying how to get the
+        // the x/y cordinates from the object,
+        // in the format of [x, y], the default
+        // format for the link generator to
+        // generate the path
+        if (this.getOrientation().toLowerCase() === &apos;toptobottom&apos;)
+        {
+            return d3.linkVertical()
+                .source((data) =&gt; [data.source.x + nodeBodyBoxWidth / 2, data.source.y - nodeBodyBoxHeight / 2])
+                .target((data) =&gt; [data.target.x + nodeBodyBoxWidth / 2, data.target.y + nodeBodyBoxHeight / 2]);
+        }
+        else
+        {
+            return d3.linkHorizontal()
+                // Inverts the X/Y coordinates to draw links for a
+                // tree starting from left to right,
+                // instead of the typical top-to-down tree
+                .source((data) =&gt; [data.source.y, data.source.x])
+                .target((data) =&gt; [data.target.y + nodeBodyBoxWidth, data.target.x]);
+        }
     }
 
     /** @inheritdoc */
@@ -388,6 +425,23 @@ class BoxedTree extends BaseTree{
         // Note that data in this context refers to D3 Tree data, not the original item data
         // To Access the original item data, use the &quot;.data&quot; property
         return this._getTitleDisplayText(nodeDataItem.data);
+    }
+
+    /** @inheritdoc */
+    centerNode(nodeDataItem) {
+        var nodeBodyBoxWidth = this.nodeSettings.getBodyBoxWidth();
+        var nodeBodyBoxHeight = this.nodeSettings.getBodyBoxHeight();
+        if (this.getOrientation().toLowerCase() === &apos;toptobottom&apos;)
+        {
+            nodeDataItem.x0 = nodeDataItem.x0 + nodeBodyBoxWidth / 2;
+            nodeDataItem.y0 = nodeDataItem.y0 + nodeBodyBoxHeight / 2;
+        }
+        else
+        {
+            nodeDataItem.y0 = nodeDataItem.y0 + nodeBodyBoxWidth / 2;
+            nodeDataItem.x0 = nodeDataItem.x0 + nodeBodyBoxHeight / 2;
+        }
+        return super.centerNode(nodeDataItem);
     }
 
     /**
