@@ -389,13 +389,13 @@ class BoxedTree extends BaseTree{
         var nodeBodyBoxHeight = this.nodeSettings.getBodyBoxHeight();
         if (this.getOrientation().toLowerCase() === 'toptobottom')
         {
-            nodeDataItem.x0 = nodeDataItem.x0 + nodeBodyBoxWidth / 2;
+            nodeDataItem.x0 = nodeDataItem.x0;
             nodeDataItem.y0 = nodeDataItem.y0 + nodeBodyBoxHeight / 2;
         }
         else
         {
             nodeDataItem.y0 = nodeDataItem.y0 + nodeBodyBoxWidth / 2;
-            nodeDataItem.x0 = nodeDataItem.x0 + nodeBodyBoxHeight / 2;
+            nodeDataItem.x0 = nodeDataItem.x0;
         }
         return super.centerNode(nodeDataItem);
     }

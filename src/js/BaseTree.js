@@ -955,45 +955,45 @@ class BaseTree {
                 .size([this.getHeight(), this.getWidth()]);
         }
 
+        if (needToCenterView === false) {
+            // Update the view with the new margins
+            this.getView()
+                .attr("transform", "translate(" + margins.left + "," + margins.top + ")");
+        }
+        else {
+            // Move the view downwards as to center the root node
+            // This is due to when you use node-size, it sets the
+            // node origin at 0, 0 instead of automatically
+            // centering it as it does with size()
+            this.getView()
+                .attr("transform", "translate(" + margins.left + ", " + (this.getHeight() / 2 + margins.top) + ")");
+        }
+
         // If we need to center the tree by adjusting the view and the node position
-        if (this.getOrientation().toLowerCase() === 'toptobottom')
+        var x0, y0;
+        if (this.getOrientation() === 'topToBottom')
         {
             if (needToCenterView === false) {
-                // Update the view with the new margins
-                this.getView()
-                    .attr("transform", "translate(" + margins.left + "," + margins.top + ")");
-                this.getRoot().y0 = this.getHeight() / 2;
+                x0 = this.getWidth() / 2;
             }
             else {
-                // Move the view downwards as to center the root node
-                // This is due to when you use node-size, it sets the
-                // node origin at 0, 0 instead of automatically
-                // centering it as it does with size()
-                this.getView()
-                    .attr("transform", "translate(" + margins.left + ", " + (this.getHeight() / 2 + margins.top) + ")");
-                this.getRoot().y0 = 0;
+                x0 = 0;
             }
-            this.getRoot().x0 = 0;
+            y0 = this.getWidth() / 4;
         }
         else
         {
             if (needToCenterView === false) {
-                // Update the view with the new margins
-                this.getView()
-                    .attr("transform", "translate(" + margins.left + "," + margins.top + ")");
-                this.getRoot().x0 = this.getHeight() / 2;
+                x0 = this.getHeight() / 2;
             }
             else {
-                // Move the view downwards as to center the root node
-                // This is due to when you use node-size, it sets the
-                // node origin at 0, 0 instead of automatically
-                // centering it as it does with size()
-                this.getView()
-                    .attr("transform", "translate(" + margins.left + ", " + (this.getHeight() / 2 + margins.top) + ")");
-                    this.getRoot().x0 = 0;
+                x0 = 0;
             }
-            this.getRoot().y0 = 0;
+            y0 = 0;
         }
+
+        this.getRoot().x0 = x0;
+        this.getRoot().y0 = y0;
 
         if (this.getZoomListener()) {
             this.getZoomListener()
