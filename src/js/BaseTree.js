@@ -979,7 +979,7 @@ class BaseTree {
             else {
                 x0 = 0;
             }
-            y0 = this.getWidth() / 4;
+            y0 = this.getHeight() / 4;
         }
         else
         {
