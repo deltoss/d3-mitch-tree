@@ -336,12 +336,6 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "js/basetree.js~basetree#[\"on\" + pascalcasedeventname]",
-    "class/js/BaseTree.js~BaseTree.html#instance-member-[\"on\" + pascalCasedEventName]",
-    "js/BaseTree.js~BaseTree#[\"on\" + pascalCasedEventName]",
-    "member"
-  ],
-  [
     "js/basetree.js~basetree#_addunderlyingchildnode",
     "class/js/BaseTree.js~BaseTree.html#instance-method-_addUnderlyingChildNode",
     "js/BaseTree.js~BaseTree#_addUnderlyingChildNode",
@@ -636,12 +630,6 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "js/basetree.js~basetree#emit",
-    "class/js/BaseTree.js~BaseTree.html#instance-method-emit",
-    "js/BaseTree.js~BaseTree#emit",
-    "method"
-  ],
-  [
     "js/basetree.js~basetree#expand",
     "class/js/BaseTree.js~BaseTree.html#instance-method-expand",
     "js/BaseTree.js~BaseTree#expand",
@@ -900,18 +888,6 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "js/basetree.js~basetree#on",
-    "class/js/BaseTree.js~BaseTree.html#instance-method-on",
-    "js/BaseTree.js~BaseTree#on",
-    "method"
-  ],
-  [
-    "js/basetree.js~basetree#onnodeclick",
-    "class/js/BaseTree.js~BaseTree.html#instance-member-onNodeClick",
-    "js/BaseTree.js~BaseTree#onNodeClick",
-    "member"
-  ],
-  [
     "js/basetree.js~basetree#regeneratenodedata",
     "class/js/BaseTree.js~BaseTree.html#instance-method-regenerateNodeData",
     "js/BaseTree.js~BaseTree#regenerateNodeData",
@@ -1060,6 +1036,12 @@ window.esdocSearchIndex = [
     "class/js/BaseTree.js~BaseTree.html#instance-method-validateSettings",
     "js/BaseTree.js~BaseTree#validateSettings",
     "method"
+  ],
+  [
+    "js/basetree.js~basetree.nodeclick",
+    "typedef/index.html#static-typedef-nodeClick",
+    "js/BaseTree.js~BaseTree.nodeClick",
+    "typedef"
   ],
   [
     "js/boxednodesettings.js",

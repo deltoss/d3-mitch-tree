@@ -17,10 +17,10 @@
 
 		<script>
 			function getData() {
-			    var data = {
+				var data = {
 					"id": 1,
-			        "name": "Animals",
-			        "type": "Root",
+					"name": "Animals",
+					"type": "Root",
 					"description": "A living organism that feeds on organic matter",
 					"children": [
 						{
@@ -172,16 +172,15 @@
 							]
 						}
 					]
-			    };
+				};
 
-			    return data;
+				return data;
 			}
 
 			var data = getData();
 				
 			var treePlugin = new d3.mitchTree.boxedTree()
 				.setData(data)
-				.setAllowPan(false)
 				.setElement(document.getElementById("visualisation"))
 				.setIdAccessor(function(data) {
 					return data.id;
@@ -195,16 +194,19 @@
 				.setTitleDisplayTextAccessor(function(data) {
 					return data.name;
 				})
-				.on("nodeClick", function(data, index, arr){
+				.on("nodeClick", function(event) {
+					console.log('The event object:')
+					console.log(event);
 					console.log("Click event was triggered!");
-					if (this.getAllowFocus())
+					if (event.type == 'focus')
 						console.log("Node is being focused");
-					else if (data.children)
+					else if (event.type == 'collapse')
 						console.log("Node is collapsing");
-					else if (!data.children)
+					else if (event.type == 'expand')
 						console.log("Node is expanding");
-					// Note you can return false to cancel the
-					// node focus/expand/collapse event
+					// You use the below line to cancel the
+					// focus/expand/collapse event
+					//   event.continue = false;
 				})
 				.initialize();
 

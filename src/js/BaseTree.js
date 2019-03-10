@@ -1,6 +1,7 @@
 import d3 from './CustomD3';
 import NodeSettings from './NodeSettings';
 import LoadOnDemandSettings from './LoadOnDemandSettings';
+import EventEmitter from 'events';
 
 /**
  * Recursively find a particular object within a hierarchical dataset.
@@ -47,7 +48,7 @@ function recursiveGet(hierarchicalObject, getChildren) {
     return allItems;
 }
 
-class BaseTree {
+class BaseTree extends EventEmitter {
     /**
      * @param {object} options The options object.
      * @param {string} [options.theme=default] The theme of the tree.
@@ -71,12 +72,11 @@ class BaseTree {
      * @param {number} [options.margins.bottom] The bottom margin for the tree diagram.
      * @param {number} [options.margins.left] The left margin for the tree diagram.
      * @param {number} [options.duration] Integer in milliseconds determining the duration of the animations for the tree.
-     * @param {object} [options.events] Object specifying the events for the tree.
-     * @param {nodeClickCallBack} [options.events.nodeClick]
      * @param {LoadOnDemandSettings} [options.loadOnDemandSettings] Object specifying the load-on-demand settings.
      * @param {NodeSettings} [options.nodeSettings] Object specifying the node settings for the tree.
      */
     constructor(options) {
+        super();
         options = options || {}; // Defaults options to an empty object
 
         var mergedOptions = {
@@ -112,10 +112,6 @@ class BaseTree {
         this.setMaxScale(mergedOptions.maxScale);
         this.setIsFlatData(mergedOptions.isFlatData);
         this.setNodeDepthMultiplier(mergedOptions.nodeDepthMultiplier)
-
-        // We define our events
-        if (mergedOptions.events.nodeClick)
-            this.onNodeClick = mergedOptions.events.nodeClick;
 
         // We define our sub-prototype (AKA sub-class) properties
 
@@ -272,39 +268,6 @@ class BaseTree {
         this.centerNode(nodeDataItem);
 
         return this;
-    }
-
-    /**
-     * Attaches a handler to the event.
-     * Note you can only attach one handler
-     * to an event at this stage.
-     * 
-     * @param {string} event The event name.
-     * @param {function} handler A callback function that executes when the event is triggerred.
-     * @returns {object} The tree object.
-     */
-    on(event, handler) {
-        if (event.indexOf("on") == 0)
-            event.slice(2); // Remove the "on"
-        var pascalCasedEventName = event.charAt(0).toUpperCase() + event.slice(1);
-        this["on" + pascalCasedEventName] = handler;
-        return this;
-    }
-
-    /**
-     * Triggers all handlers associated with an event.
-     * 
-     * @param {string} event The event name.
-     * @param {...object} [args] The arguments supplied to the event.
-     * @returns {*} The returned value of the triggered handler.
-     */
-    emit(event, ...args) {
-        if (event.indexOf("on") == 0)
-            event.slice(2); // Remove the "on"
-        var pascalCasedEventName = event.charAt(0).toUpperCase() + event.slice(1);
-        var handler = this["on" + pascalCasedEventName];
-        if (handler)
-            return handler.apply(this, args);
     }
 
     /**
@@ -538,8 +501,11 @@ class BaseTree {
 
     /**
      * Sets the boolean value indicating
-     * whether to pan to the clicked node
-     * feature is enabled or not.
+     * whether to focus to the clicked node
+     * or not. Focusing on a node would hide
+     * all irrelevant nodes that's not a 
+     * parent, sibling or ancestor of the
+     * clicked node.
      * 
      * @param {boolean} newAllowFocus Whether to pan to the clicked node.
      * @returns {object} The tree object.
@@ -1236,12 +1202,27 @@ class BaseTree {
      * @param {object} nodeDataItem The D3 node data item that was clicked.
      * @param {number} index The index of the D3 node being clicked in the array of siblings.
      * @param {object[]} arr Array of siblings D3 node, inclusive of the clicked node data item itself.
+     * @emits {nodeClick} Emit node click event.
      * @returns {boolean} True meaning it successfully focused/expanded/collapsed a node. False otherwise.
      */
     _onNodeClick(nodeDataItem, index, arr) {
-        var continueFocus = true;
-        continueFocus = this.emit('nodeClick', nodeDataItem, index, arr);
-        if (continueFocus === false)
+        var eventType = null;
+        if (this.getAllowFocus())
+            eventType = 'focus';
+        else if (nodeDataItem.children)
+            eventType = 'collapse';
+        else
+            eventType = 'expand';
+        
+        var event = {
+            type: eventType,
+            continue: true,
+            nodeDataItem: nodeDataItem,
+            nodeDataItemIndex: index,
+            nodeDataItems: arr
+        }
+        this.emit('nodeClick', event);
+        if (event.continue === false)
             return false;
         if (this.getAllowFocus())
             this.nodeFocus.call(this, nodeDataItem);
@@ -1592,13 +1573,17 @@ class BaseTree {
      */
 
     /**
-     * Event handler for the node click event.
-     * @callback nodeClickCallBack
-     * @param {object} nodeDataItem Node data item representing the clicked node.
-     * @param {object} nodeDataItem.data The data item of the clicked node.
-     * @param {number} index Index of the clicked item in the array of siblings.
-     * @param {object[]} arr The array of sibling rendered SVG elements, inclusive of the node itself.
-     * @returns {boolean} If returns false, it'll prevent propogation to focus/expand/collapse the node.
+     * Node click event, triggered when a
+     * user clicks on a tree node.
+     * 
+     * @typedef {object} nodeClick
+     * @property {object} event Object containing various event parameters.
+     * @property {string} event.type The type of the operation the click will trigger, whether it's 'focus', 'expand', or 'collapse'.
+     * @property {boolean} event.continue Whether to continue the node focusing/expanding/collapsing.
+     * @property {object} event.nodeDataItem Node data item representing the clicked node.
+     * @property {object} event.nodeDataItem.data The data item of the clicked node.
+     * @property {number} event.nodeDataItemIndex Index of the clicked item in the array of siblings.
+     * @property {object[]} event.nodeDataItems The array of sibling rendered SVG elements, inclusive of the node itself.
      */
 }
 
@@ -1628,9 +1613,6 @@ BaseTree.defaults = {
         left: 100
     },
     duration: 750,
-    events: {
-        nodeClick: null
-    },
     loadOnDemandSettings: {
         // Defaults are defined in the load-on-demand settings prototype
     },
