@@ -17,7 +17,7 @@ A D3 plugin which lets you create a stunning interactive hierarchical tree visua
 
 # Documentation
 
-The project documentation can be found in the repo's [GitHub pages](https://deltoss.github.io/d3-mitch-tree/)
+The project documentation can be found in the repo's [Netlify site](https://d3-mitch-tree.netlify.com)
 
 # License
 
