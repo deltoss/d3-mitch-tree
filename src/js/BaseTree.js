@@ -1361,7 +1361,7 @@ class BaseTree extends EventEmitter {
             if (nodeDataItem.children)
                 this.collapse(nodeDataItem);
             else
-                this.expand(nodeDataItem)
+                this.expand(nodeDataItem);
             this.update(nodeDataItem);
             if (this.getAllowNodeCentering() === true)
                 this.centerNode(nodeDataItem);
@@ -1477,7 +1477,7 @@ class BaseTree extends EventEmitter {
             .classed("childless", (data, index, arr) => !data.children && !data._children)
             .classed("selected", (data, index, arr) => data.selected);
 
-            this._nodeUpdate(nodeUpdate, nodeUpdateTransition, nodes);
+        this._nodeUpdate(nodeUpdate, nodeUpdateTransition, nodes);
 
         // Remove any exiting nodes
         var nodeExit = nodes.exit();

@@ -13562,7 +13562,11 @@ function (_BaseTree) {
   }, {
     key: "_getNodeSize",
     value: function _getNodeSize() {
-      return [this.nodeSettings.getBodyBoxHeight() + this.nodeSettings.getVerticalSpacing(), this.nodeSettings.getBodyBoxWidth() + this.nodeSettings.getHorizontalSpacing()];
+      if (this.getOrientation().toLowerCase() === 'toptobottom') {
+        return [this.nodeSettings.getBodyBoxWidth() + this.nodeSettings.getHorizontalSpacing(), this.nodeSettings.getBodyBoxHeight() + this.nodeSettings.getVerticalSpacing()];
+      } else {
+        return [this.nodeSettings.getBodyBoxHeight() + this.nodeSettings.getVerticalSpacing(), this.nodeSettings.getBodyBoxWidth() + this.nodeSettings.getHorizontalSpacing()];
+      }
     }
     /** @inheritdoc */
 
