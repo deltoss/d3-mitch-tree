@@ -198,26 +198,7 @@
 				.initialize();
 
 			treePlugin.getZoomListener().scaleTo(treePlugin.getSvg(), 0.5);
-				
-			/* Alternative Options Object Syntax, opposed to the Fluent Interface Above
-				var options = {
-					data: data,
-					element: document.getElementById("visualisation"),
-					getId: function (data) {
-						return data.id;
-					},
-					getChildren: function (data) {
-						return data.children;
-					},
-					getBodyDisplayText: function (data) {
-						return data.description;
-					},
-					getTitleDisplayText: function (data) {
-						return data.name;
-					}
-				};
-				var treePlugin = new d3.MitchTree.BoxedTree(options).initialize();
-			*/
+			treePlugin.getZoomListener().translateTo(treePlugin.getSvg(), treePlugin.getWidthWithoutMargins(), treePlugin.getHeightWithoutMargins() / 2);
 		</script>
 	</body>
 </html>
