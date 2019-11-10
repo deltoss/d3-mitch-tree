@@ -1,7 +1,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![made-with-esdocs](https://img.shields.io/badge/Made%20with-ESDocs-green.svg)](https://esdoc.org/)
 
-![D3MitchTree Demo](manual/assets/D3MitchTree&#32;Demo.gif)
+![D3MitchTree Demo](manual/asset/D3MitchTree&#32;Demo.gif)
 
 # Introduction
 

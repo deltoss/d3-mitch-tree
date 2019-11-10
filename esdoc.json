@@ -31,7 +31,7 @@
                     "./manual/api.md",
                     "./manual/development.md"
                   ],
-                  "asset": "manual/assets/"
+                  "asset": "manual/asset/"
                 }
               }
         }
