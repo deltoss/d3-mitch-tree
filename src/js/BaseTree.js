@@ -1219,7 +1219,10 @@ class BaseTree extends EventEmitter {
             continue: true,
             nodeDataItem: nodeDataItem,
             nodeDataItemIndex: index,
-            nodeDataItems: arr
+            nodeDataItems: arr,
+            preventDefault: function() {
+                event.continue = false;
+            }
         }
         this.emit('nodeClick', event);
         if (event.continue === false)
@@ -1336,8 +1339,6 @@ class BaseTree extends EventEmitter {
         this.expand(nodeDataItem);
 
         this.update(nodeDataItem);
-        if (this.getAllowNodeCentering() === true)
-            this.centerNode(nodeDataItem);
         return this;
     }
 
@@ -1348,13 +1349,20 @@ class BaseTree extends EventEmitter {
      * @returns {object} The tree object.
      */
     nodeToggle(nodeDataItem) {
+        // Clear all selections, and select current node
+        this.removeSelection(this.getRoot());
+        nodeDataItem.selected = true;
         // If it hasn't been loaded, and it's specified to have children,
         // then perform load-on-demand to load new items from server
         // and add them as child nodes
         if (!nodeDataItem.children && !nodeDataItem._children
             && this.loadOnDemandSettings.isEnabled()
             && this.loadOnDemandSettings.hasChildren(nodeDataItem.data)) {
-            var processData = (result) => this._processLoadedDataForNodeToggle(nodeDataItem, result);
+            var processData = (result) => {
+                this._processLoadedDataForNodeToggle(nodeDataItem, result);
+                if (this.getAllowNodeCentering() === true)
+                    this.centerNode(nodeDataItem);
+            }
             this.loadOnDemandSettings.loadChildren(nodeDataItem.data, processData);
         }
         else {

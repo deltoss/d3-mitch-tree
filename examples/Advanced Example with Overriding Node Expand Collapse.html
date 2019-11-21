@@ -194,24 +194,20 @@
 				.setTitleDisplayTextAccessor(function(data) {
 					return data.name;
 				})
+				.setAllowFocus(false)
 				.on("nodeClick", function(event) {
-					console.log('The event object:')
-					console.log(event);
-					console.log("Click event was triggered!");
+					// This would cancel collapse of nodes,
+					// but it'll still select the node
+					// and center to it
+					this.removeSelection(this.getRoot());
+					event.nodeDataItem.selected = true;
+					if (this.getAllowNodeCentering())
+						this.centerNode(event.nodeDataItem);
+					this.update();
 
-					// Note for 'collapse' or 'expand' event type
-					// to trigger, you'll need to disable focus mode.
-					// You can do this by passing in false for the
-					// allowFocus setting.
-					if (event.type == 'focus')
-						console.log("Node is being focused");
-					else if (event.type == 'collapse')
-						console.log("Node is collapsing");
-					else if (event.type == 'expand')
-						console.log("Node is expanding");
-					// You use the below line to cancel the
-					// focus/expand/collapse event
-					//   event.continue = false;
+					// Cancel the collapse event
+					if (event.type === 'collapse')
+						event.continue = false;
 				})
 				.initialize();
 
@@ -235,21 +231,13 @@
 					},
 					events: {
 						nodeClick: function(data, index, arr){
-							console.log("Click event was triggered!");
+							this.removeSelection(this.getRoot());
+							event.nodeDataItem.selected = true;
+							this.centerNode(event.nodeDataItem);
 
-							// Note for 'collapse' or 'expand' event type
-							// to trigger, you'll need to disable focus mode.
-							// You can do this by passing in false for the
-							// allowFocus setting.
-							if (event.type == 'focus')
-								console.log("Node is being focused");
-							else if (event.type == 'collapse')
-								console.log("Node is collapsing");
-							else if (event.type == 'expand')
-								console.log("Node is expanding");
-							// You use the below line to cancel the
-							// focus/expand/collapse event
-							//   event.continue = false;
+							// Cancel the collapse event
+							if (event.type === 'collapse')
+								event.continue = false;
 						}
 					}
 				};
