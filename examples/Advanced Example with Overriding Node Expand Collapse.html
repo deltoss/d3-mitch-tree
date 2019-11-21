@@ -207,7 +207,7 @@
 
 					// Cancel the collapse event
 					if (event.type === 'collapse')
-						event.continue = false;
+						event.preventDefault();
 				})
 				.initialize();
 
@@ -237,7 +237,7 @@
 
 							// Cancel the collapse event
 							if (event.type === 'collapse')
-								event.continue = false;
+								event.preventDefault();
 						}
 					}
 				};

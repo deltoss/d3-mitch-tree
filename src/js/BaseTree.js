@@ -1588,6 +1588,7 @@ class BaseTree extends EventEmitter {
      * @property {object} event Object containing various event parameters.
      * @property {string} event.type The type of the operation the click will trigger, whether it's 'focus', 'expand', or 'collapse'.
      * @property {boolean} event.continue Whether to continue the node focusing/expanding/collapsing.
+     * @property {function} event.preventDefault Call this function to prevent the default behavior of node focusing/expanding/collapsing.
      * @property {object} event.nodeDataItem Node data item representing the clicked node.
      * @property {object} event.nodeDataItem.data The data item of the clicked node.
      * @property {number} event.nodeDataItemIndex Index of the clicked item in the array of siblings.
