@@ -18,7 +18,6 @@ docs
 # Non-NPM related project directories and files
 manual
 build
-dist
 src
 test
 examples

@@ -1,0 +1,79 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+version: 2
+
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: circleci/node:12.13
+
+jobs:
+  build:
+    <<: *defaults
+
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run:
+          name: Install dependencies
+          command: npm install
+      - run:
+          name: Compile
+          command: npm run build-dev
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      - persist_to_workspace:
+          root: ~/repo
+          paths: .
+  deploy-package:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      # Note the additional configurations for
+      # semantic-release is in the folder itself,
+      # inside `release.config.js` file.
+      - run:
+          name: Release package
+          command: npx semantic-release
+  deploy-docs:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Deploy Documentation
+          command: npx netlify-cli deploy --dir docs/ --prod --message "Automated Deployment by CircleCI"
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+      - deploy-package:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - master
+      - deploy-docs:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - master
