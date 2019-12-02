@@ -16,5 +16,4 @@ package-lock.json
 # check it into source control.
 docs
 dist
-build
 lib
