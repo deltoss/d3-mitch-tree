@@ -1,11 +1,6 @@
 .mitch-d3-tree {
 	&.circle-tree {
 		.node {
-			&.selected circle {
-				cursor: inherit;
-				pointer-events: none;			
-			}
-	
 			circle {
                 cursor: pointer;
                 r: 10;
