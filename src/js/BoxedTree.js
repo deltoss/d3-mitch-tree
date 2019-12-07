@@ -49,8 +49,8 @@ class BoxedTree extends BaseTree{
 
         bodyGroups.append("rect")
             .classed("body-box", true)
-            .attr("width", 1e-6)
-            .attr("height", 1e-6);
+            .attr("width", 0.000001)
+            .attr("height", 0.000001);
 
         bodyGroups.each(function(data, index, arr) {
             var element = this;
@@ -184,11 +184,11 @@ class BoxedTree extends BaseTree{
 
         // On exit animate out
         nodeExitTransition.select(".node .body-group rect")
-            .attr("width", 1e-6)
-            .attr("height", 1e-6);
+            .attr("width", 0.000001)
+            .attr("height", 0.000001);
 
         nodeExitTransition.select(".node .body-group .d3plus-textBox")
-            .style("fill-opacity", 1e-6)
+            .style("fill-opacity", 0.000001)
             .attr("transform", (data, index, arr) => "translate(0," + (-nodeBodyBoxHeight / 2) + ")")
             .selectAll("text")
                 .style("font-size", 0)
@@ -199,11 +199,11 @@ class BoxedTree extends BaseTree{
             .attr("transform", "translate(0, " + (-nodeBodyBoxHeight / 2) + ")");
 
         nodeExitTransition.select(".node .title-group rect")
-            .attr("width", 1e-6)
-            .attr("height", 1e-6);
+            .attr("width", 0.000001)
+            .attr("height", 0.000001);
 
         nodeExitTransition.select(".node .title-group .d3plus-textBox")
-            .style("fill-opacity", 1e-6)
+            .style("fill-opacity", 0.000001)
             .attr("transform", "translate(0,0)")
             .selectAll("text")
                 .style("font-size", 0)
@@ -212,7 +212,7 @@ class BoxedTree extends BaseTree{
 
         // On exit reduce the opacity of text labels
         nodeExitTransition.select(".d3plus-textBox")
-            .style("fill-opacity", 1e-6);
+            .style("fill-opacity", 0.000001);
         return this;
     }
 

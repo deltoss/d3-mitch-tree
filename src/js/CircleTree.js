@@ -31,7 +31,7 @@ class CircleTree extends BaseTree{
     _nodeEnter(nodeEnter, nodes) {
         // Add Circle for the nodes
         nodeEnter.append("circle")
-            .attr("r", 1e-6);
+            .attr("r", "0.5em");
 
         // Add labels for the nodes
         nodeEnter.append("text")
@@ -96,11 +96,11 @@ class CircleTree extends BaseTree{
 
         // On exit reduce the node circles size to 0
         nodeExitTransition.select("circle")
-            .attr("r", 1e-6);
+            .attr("r", "0.000001em");
 
         // On exit reduce the opacity of text labels
         nodeExitTransition.select("text")
-            .style("fill-opacity", 1e-6);
+            .style("fill-opacity", 0.000001);
         return this;
     }
 
