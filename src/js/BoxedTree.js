@@ -192,8 +192,8 @@ class BoxedTree extends BaseTree{
             .attr("transform", (data, index, arr) => "translate(0," + (-nodeBodyBoxHeight / 2) + ")")
             .selectAll("text")
                 .style("font-size", 0)
-                .attr("y", 0)
-                .attr("x", 0);
+                .attr("y", "0px")
+                .attr("x", "0px");
 
         nodeExitTransition.select(".node .title-group")
             .attr("transform", "translate(0, " + (-nodeBodyBoxHeight / 2) + ")");
@@ -207,8 +207,8 @@ class BoxedTree extends BaseTree{
             .attr("transform", "translate(0,0)")
             .selectAll("text")
                 .style("font-size", 0)
-                .attr("y", 0)
-                .attr("x", 0);
+                .attr("y", "0px")
+                .attr("x", "0px");
 
         // On exit reduce the opacity of text labels
         nodeExitTransition.select(".d3plus-textBox")
