@@ -36,7 +36,7 @@
     "@babel/preset-env": "^7.7.4",
     "@commitlint/cli": "^8.2.0",
     "@commitlint/config-conventional": "^8.2.0",
-    "@semantic-release/changelog": "^3.0.6",
+    "@semantic-release/changelog": "^5.0.0",
     "@semantic-release/git": "^7.0.18",
     "autoprefixer": "^9.7.3",
     "babel-loader": "^8.0.6",
