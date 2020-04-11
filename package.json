@@ -37,7 +37,7 @@
     "@commitlint/cli": "^8.2.0",
     "@commitlint/config-conventional": "^8.2.0",
     "@semantic-release/changelog": "^5.0.1",
-    "@semantic-release/git": "^7.0.18",
+    "@semantic-release/git": "^9.0.0",
     "autoprefixer": "^9.7.3",
     "babel-loader": "^8.0.6",
     "esdoc": "^1.1.0",
