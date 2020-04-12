@@ -202,7 +202,7 @@
 				var value = document.getElementById('focusText').value;
 				var nodeMatchingText = treePlugin.getNodes().find(function(node){
 					return node.data.name == value;
-				});
+				}); //example
 				if (nodeMatchingText)
 					treePlugin.focusToNode(nodeMatchingText);
 				else if (value != null)
